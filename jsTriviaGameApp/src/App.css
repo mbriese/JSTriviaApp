@@ -61,7 +61,8 @@ html, body {
 
 
 .content {
-  padding-top: 20px; /* Adjust based on the total height of the fixed navbar and sub-nav */
+
+  padding-top: 1px; /* Adjust based on the total height of the fixed navbar and sub-nav */
 
 }
 .cardsContainer {
