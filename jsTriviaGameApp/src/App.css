@@ -19,7 +19,8 @@ html, body {
   color: white;
   text-align: center;
   padding: 10px 0;
-  width: 100%; /* Cover the full width */
+  width: 50%; /* Cover the half the width width */
+  margin: 0 auto;
   z-index: 1000; /* Ensures it's above other items */
   border-radius: 15px;
 }
@@ -45,12 +46,14 @@ html, body {
 
 .badge {
   display: inline-block;
-  padding: 5px 15px;
-  margin: 0 5px;
+  padding: 5px 15px 3px 3px;
+  margin: 5px 5px;
+  text-indent: 15px;
   border-radius: 50px; /* Pill shape */
   background-color: #6A9AE2; /* Lighter shade of blue */
   color: white;
-  border: none;
+  border-color: black;
+  border-width: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -78,7 +81,7 @@ html, body {
 .card, .card-back {
   background-color: #4169E1;
   box-shadow:0 4px 8px rgba(0,0,0,0.5);
-  color:white;
+  color: white;
   border-radius: 10px;
   padding: 15px;
   height: auto;
@@ -102,7 +105,8 @@ html, body {
 
 
 .card-back{
-  background-color: #b322a3;
+  color: black;
+  background-color: white;
   cursor: pointer;
 }
 
@@ -113,11 +117,18 @@ html, body {
 }
 
 .category-button {
+  float: left;
+  width: 50px;
+  padding-top: 10px;
+  padding-right: 200px;
+  padding-left: 50px;
+  padding-bottom: 3px;
+  margin: 5px 5px;
+  text-indent: 15px;
   color: white;
   font-weight: bold;
-  padding: 10px;
-  margin-right: 5px;
   background-color: #6A9AE2;
+  border-radius: 50px;
 }
 
 .categoryButton:hover {
