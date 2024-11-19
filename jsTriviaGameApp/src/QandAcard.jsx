@@ -1,14 +1,15 @@
-import React from 'react';
 
-// eslint-disable-next-line no-unused-vars
-function QandAcard(props) {
+
+function QandAcard({category, question, answer}) {
     return (
         <div>
             <div className="cardsContainer">
                 <div className="card">
+                    <p>{category}</p>
                     <p>
-                        Question: Which of the five Great Lakes does not have a border with Canada?
+                        {question}
                     </p>
+                    <p>{answer}</p>
                     <p className="badge">Lake Huron</p>
                     <p className="badge">Lake Erie</p>
                     <p className="badge">Lake Superior</p>
