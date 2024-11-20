@@ -3,8 +3,9 @@
 import './App.css'
 import './QCard.jsx'
 import QCard from "./QCard.jsx";
+import {useState} from "react";
 
-const categories = ['Geography', 'Entertainment', 'History', 'Arts & Leisure', 'Science & Nature', 'Sports & Leisure'];
+const categories = ['Random', 'Geography', 'Entertainment', 'History', 'Arts & Literature', 'Science & Nature', 'Sports & Leisure'];
 
 const triviaQuestions = [
     {category: 'Geography', question: 'Which of the five Great Lakes does not have a border with Canada?', answer: 'Lake Michigan'},
@@ -52,9 +53,17 @@ const triviaQuestions = [
 ];
 
 function App() {
-
-  const handleClick=()=>{
-      console.log("click handler")
+    const [filteredTriviaQuestions, setFilteredTriviaQuestions] = useState(triviaQuestions)
+  const handleClick=(category)=> {
+      console.log(category)
+      // filter all questions by category
+      if (category === "Random") {
+          setFilteredTriviaQuestions(triviaQuestions)
+      } else {
+          // return only requested triviaQuestions
+          const myFilteredCategoryQuestions = triviaQuestions.filter(questions => questions.category === category)
+          setFilteredTriviaQuestions(myFilteredCategoryQuestions)
+      }
   }
 
   return (
@@ -68,7 +77,8 @@ function App() {
                       <button
                           key={category}
                           onClick={
-                              handleClick
+                            ()=>{
+                              handleClick(category)}
                           }
                       >{category}
                       </button>
@@ -79,7 +89,7 @@ function App() {
         <p>Rules: Answer 6 questions in a category to win a game</p>
       </div>
         <div className="content">
-            {triviaQuestions.map(questions => {
+            {filteredTriviaQuestions.map(questions => {
             return(
 
             <QCard
