@@ -1,15 +1,28 @@
+// eslint-disable-next-line react/prop-types
+function QCard({category, question, answer1, answer2, answer3, answer4, answer5}) {
 
-
-function QCard({key, category, question, answer}) {
     return (
         <div>
             <div className="cardsContainer">
+
                 <div className="card">
                     <p>Category: {category}</p>
                     <p>
-                       Question: {question}
+                        Question: {question}
                     </p>
-                    <p>Answer: {answer}</p>
+                    <div className="badge">
+                        {answer1}
+                    </div>
+                    <div className="badge">
+                        {answer2}
+                    </div>
+                    <div className="badge">
+                        {answer3}
+                    </div>
+                    <div className="badge">
+                        {answer4}
+                    </div>
+
 
                     <div>
                         <div className="category-button">Prev Question</div>
@@ -17,13 +30,12 @@ function QCard({key, category, question, answer}) {
 
                     </div>
                 </div>
+
                 <div className="card-back">
                     <p>
-                        Question: {question}
+                    Question: {question}
                     </p>
-                    <p>
-                        Answer: {answer}
-                    </p>
+                    <div className="badge">Answer: {answer5}</div>
                 </div>
             </div>
         </div>
