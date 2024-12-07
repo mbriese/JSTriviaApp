@@ -12,7 +12,7 @@ const triviaQuestions = [
         answer1: 'Lake Michigan', answer2: 'Lake Huron', answer3: 'Lake Ontario', answer4: 'Lake Superior', answer5: 'Lake Michigan',
         },
     {category: 'Entertainment', question: 'Which self-proclaimed best friend of Nicole Brown Simpson wrote her posthumous ' +
-            'tell-all and appeared on the The Read Housewives of Beverly Hills?', answer1: 'Faye Resnick',
+            'tell-all and appeared on the The Real Housewives of Beverly Hills?', answer1: 'Faye Resnick',
         answer2: 'Jane Doe', answer3: 'Barbara Walters', answer4: 'Rosa Parks', answer5: 'Faye Resnick'},
     {category: 'History', question: 'What was Martin Luther King, Jrs birth name?', answer1: 'Martin King, Jr',
         answer2: 'Marty King', answer3: 'Luther King', answer4: 'King Junior', answer5: 'Martin King, Jr'},
@@ -109,9 +109,13 @@ const triviaQuestions = [
 
 ];
 
+
 function App() {
     const [filteredTriviaQuestions, setFilteredTriviaQuestions] = useState(triviaQuestions)
-  const handleClick=(category)=> {
+
+
+
+    const handleClick=(category)=> {
       console.log(category)
       // filter all questions by category
       if (category === "Random") {
@@ -124,45 +128,72 @@ function App() {
   }
 
   return (
-    <>
-      <div className="main-nav">
-        <h1>Trivial Pursuit Game</h1>
-          <p>Select a category</p>
-          <div className='category-nav'>
-              {categories.map((category)=>{
+      <>
+          <div className="main-nav">
+              <h1>Trivial Pursuit Game</h1>
+          </div>
+          <div className='container-lg'>
+              <div className='main-nav p-5'>Quick game: 6 questions, 1 from each category
+                  <button onClick={
+                      handleClick
+                  }
+                      className='main-nav-button'>
+                      Click to Play Quick Game!
+                  </button>
+              </div>
+              <div className='main-nav p-5'>Expert category game: 6 questions from 1 category
+                  <button
+                      className='main-nav-button'>
+                      Click to Play Expert Game!
+                  </button>
+              </div>
+              <div className='main-nav p-5'>Full game: Answer 6 questions from each category
+                  <button
+                      className='main-nav-button'>
+                      Click to Play Full Game!
+                  </button>
+              </div>
+          </div>
+
+          <div className="cardsContainer cards">
+              <h1>Select a category</h1>
+
+              <div className='category-nav'>
+                  {categories.map((category) => {
+                      return (
+                          <button
+                              key={category}
+                              onClick={
+                                  () => {
+                                      handleClick(category)
+                                  }
+                              }
+                          >{category}
+                          </button>
+                      )
+                  })}
+
+              </div>
+
+          </div>
+          <div className="content">
+              {filteredTriviaQuestions.map(questions => {
                   return (
-                      <button
-                          key={category}
-                          onClick={
-                            ()=>{
-                              handleClick(category)}
-                          }
-                      >{category}
-                      </button>
-              )
+
+                      <QCard
+                          key={questions.question}
+                          category={questions.category}
+                          question={questions.question}
+                          answer1={questions.answer1}
+                          answer2={questions.answer2}
+                          answer3={questions.answer3}
+                          answer4={questions.answer4}
+                          answer5={questions.answer5}
+                      />)
               })}
 
           </div>
-        <p>Rules: Answer 6 questions in a category to win a game</p>
-      </div>
-        <div className="content">
-            {filteredTriviaQuestions.map(questions => {
-            return(
-
-            <QCard
-                key={questions.question}
-                category={questions.category}
-                question={questions.question}
-                answer1={questions.answer1}
-                answer2={questions.answer2}
-                answer3={questions.answer3}
-                answer4={questions.answer4}
-                answer5={questions.answer5}
-            />)
-            })}
-
-        </div>
-    </>
+      </>
   )
 }
 

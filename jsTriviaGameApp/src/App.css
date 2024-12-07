@@ -31,8 +31,17 @@ html, body {
 }
 
 .main-nav p {
-  margin: 0 0 10px;
+  margin: 0 auto;
   font-style: italic;
+  height: 200px;
+}
+
+.main-nav-button {
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  color: white;
+  margin: 0 auto;
 }
 
 /* Category navigation styles */
@@ -71,6 +80,7 @@ html, body {
 .cardsContainer {
   display: flex;
   flex-wrap: wrap; /* Allows items to wrap to the next line */
+  width: auto;
   gap: 20px; /* Adjust the space between cards */
   row-gap: 20px;
   padding: 20px; /* Padding around the entire grid */
@@ -119,12 +129,8 @@ html, body {
 }
 
 .category-button {
-  float: left;
   width: 50px;
-  padding-top: 10px;
-  padding-right: 200px;
-  padding-left: 50px;
-  padding-bottom: 3px;
+  padding: 10px 200px 3px 50px;
   margin: 5px 5px;
   text-indent: 15px;
   color: white;
