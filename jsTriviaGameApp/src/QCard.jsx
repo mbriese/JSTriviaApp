@@ -1,11 +1,20 @@
 // eslint-disable-next-line react/prop-types
+
+import {useState} from "react";
 function QCard({category, question, answer1, answer2, answer3, answer4, answer5}) {
 
+    const [showQuestion, setShowQuestion] = useState(false)
+    function handleClick() {
+        setShowQuestion(!showQuestion)
+        console.log(showQuestion)
+    }
     return (
-        <div>
+        <div onClick={
+            ()=>{ handleClick()}
+        }>
             <div className="cardsContainer">
-
-                <div className="card">
+                {showQuestion &&
+                <div className="card" >
                     <p>Category: {category}</p>
                     <p>
                         Question: {question}
@@ -30,16 +39,20 @@ function QCard({category, question, answer1, answer2, answer3, answer4, answer5}
 
                     </div>
                 </div>
-
+                }
+                {/* show answer */}
+                { !showQuestion &&
                 <div className="card-back">
                     <p>
                     Question: {question}
                     </p>
                     <div className="badge">Answer: {answer5}</div>
-                </div>
+                </div>}
             </div>
+
         </div>
-    );
+
+    )
 }
 
 export default QCard;
