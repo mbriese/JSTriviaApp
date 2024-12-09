@@ -47,7 +47,7 @@ html, body {
 /* Category navigation styles */
 .category-nav {
   background-color:black; /* Dark contrasting background for category badges */
-  padding: 10px 0;
+  padding: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
   color:white;
@@ -82,7 +82,7 @@ html, body {
   flex-wrap: wrap; /* Allows items to wrap to the next line */
   width: auto;
   gap: 20px; /* Adjust the space between cards */
-  row-gap: 20px;
+  row-gap: 5px;
   padding: 20px; /* Padding around the entire grid */
   justify-content: center; /* Center items in the container */
   margin-top: 50px;
@@ -129,10 +129,9 @@ html, body {
 }
 
 .category-button {
-  width: 50px;
-  padding: 10px 200px 3px 50px;
+  width: 200px;
+  padding: 10px;
   margin: 5px 5px;
-  text-indent: 15px;
   color: white;
   font-weight: bold;
   background-color: #6A9AE2;

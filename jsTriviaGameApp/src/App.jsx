@@ -5,7 +5,7 @@ import './QCard.jsx'
 import QCard from "./QCard.jsx";
 import {useState} from "react";
 
-const categories = ['Random', 'Geography', 'Entertainment', 'History', 'Arts & Literature', 'Science & Nature', 'Sports & Leisure'];
+const categories = ['Geography', 'Entertainment', 'History', 'Arts & Literature', 'Science & Nature', 'Sports & Leisure'];
 
 const triviaQuestions = [
     {category: 'Geography', question: 'Which of the five Great Lakes does not have a border with Canada?',
@@ -156,12 +156,12 @@ function App() {
           </div>
 
           <div className="cardsContainer cards">
-              <h1>Select a category</h1>
+              <h3>Select a category</h3>
 
               <div className='category-nav'>
                   {categories.map((category) => {
                       return (
-                          <button
+                          <button className='category-button'
                               key={category}
                               onClick={
                                   () => {
