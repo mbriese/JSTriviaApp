@@ -60,7 +60,7 @@ html, body {
 
 /* Category navigation styles */
 .category-nav {
-  background-color:black; /* Dark contrasting background for category badges */
+  background-color:lightseagreen; /* Dark contrasting background for category badges */
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -73,7 +73,7 @@ html, body {
   margin: 5px 5px;
   text-indent: 15px;
   border-radius: 50px; /* Pill shape */
-  background-color: #6A9AE2; /* Lighter shade of blue */
+  background-color: darkblue; /* Lighter shade of blue */
   color: white;
   border-color: black;
   border-width: 10px;
@@ -149,8 +149,8 @@ html, body {
 }
 
 .card-back{
-  color: black;
-  background-color: white;
+  color: white;
+  background-color: teal;
   cursor: pointer;
 }
 
@@ -166,7 +166,7 @@ html, body {
   margin: 5px 5px;
   color: white;
   font-weight: bold;
-  background-color: #6A9AE2;
+  background-color: black;
   border-radius: 50px;
 }
 

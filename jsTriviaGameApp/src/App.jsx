@@ -123,6 +123,10 @@ function App() {
           setFilteredTriviaQuestions(myFilteredCategoryQuestions)
   }
 
+    const handleGameTypeClick=(gameType)=> {
+        console.log(gameType)
+    }
+
   return (
       <>
           <div className="main-nav">
@@ -130,28 +134,27 @@ function App() {
           </div>
           <div className='container-lg'>
               <div className='game-type-nav'>Quick game: 6 questions, 1 from each category
-                  <button onClick={
-                      handleClick
-                  }
-                      className='main-nav-button'>
+                  <button
+                      className='main-nav-button' onClick={()=>handleGameTypeClick('quick')}>
                       Click to Play Quick Game!
                   </button>
               </div>
-              <div className='game-type-nav'>Expert category game: 6 questions from 1 category
+              <div className='game-type-nav'>
+                  Expert category game: 6 questions from 1 category
                   <button
-                      className='main-nav-button'>
+                      className='main-nav-button'  onClick={()=>handleGameTypeClick('expert')}>
                       Click to Play Expert Game!
                   </button>
               </div>
               <div className='game-type-nav'>Full game: Answer 6 questions from each category
                   <button
-                      className='main-nav-button'>
+                      className='main-nav-button'  onClick={()=>handleGameTypeClick('full')}>
                       Click to Play Full Game!
                   </button>
               </div>
           </div>
 
-          <div className="cardsContainer cards">
+           <div className="cardsContainer cards">
               <h3>Select a category</h3>
 
               <div className='category-nav'>
@@ -170,6 +173,7 @@ function App() {
                   })}
 
               </div>
+
 
           </div>
           <div className="content">
