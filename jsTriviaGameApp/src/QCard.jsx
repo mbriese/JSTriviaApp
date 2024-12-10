@@ -6,13 +6,18 @@ import {useState} from "react";
 function QCard({category, question, answer1, answer2, answer3, answer4, answer5}) {
 
     const [showQuestion, setShowQuestion] = useState(false)
-    function handleClick() {
+    function handleClick(message) {
         setShowQuestion(!showQuestion)
         console.log(showQuestion)
+        console.log(message)
+    }
+
+    function handleButtonClick(answer) {
+        console.log(answer)
     }
     return (
         <div onClick={
-            ()=>{ handleClick()}
+            ()=>{ handleClick('check answer')}
         }>
             <div className="cardsContainer">
                 {showQuestion &&
@@ -21,16 +26,24 @@ function QCard({category, question, answer1, answer2, answer3, answer4, answer5}
                     <p>
                         Question: {question}
                     </p>
-                    <div className="badge">
+                    <div className="answer-button" onClick={
+                        ()=>{ handleButtonClick('answer1')}
+                    }>
                         {answer1}
                     </div>
-                    <div className="badge">
+                    <div className="answer-button" onClick={
+                        ()=>{ handleButtonClick('answer2')}
+                    }>
                         {answer2}
                     </div>
-                    <div className="badge">
+                    <div className="answer-button"  onClick={
+                        ()=>{ handleButtonClick('answer3')}
+                    }>
                         {answer3}
                     </div>
-                    <div className="badge">
+                    <div className="answer-button"  onClick={
+                        ()=>{ handleButtonClick('answer4')}
+                    }>
                         {answer4}
                     </div>
 

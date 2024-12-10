@@ -15,8 +15,8 @@ html, body {
 .main-nav {
   height: 100px;
   top: 0;
-  background-color: #4169E1; /* Royal Blue */
-  color: white;
+  background-color: lightpink; /* miami dolphins colors */
+  color: black;
   text-align: center;
   padding: 10px 0;
   width: 100%; /* Cover the full width */
@@ -37,11 +37,25 @@ html, body {
 }
 
 .main-nav-button {
-  background-color: blue;
+  background-color: mediumaquamarine;
   display: flex;
   align-items: center;
   color: white;
   margin: 0 auto;
+}
+
+/* differentiate between game type navbar styles */
+.game-type-nav {
+  height: 100px;
+  top: 0;
+  background-color: teal  ; /* Royal Blue */
+  color: white;
+  text-align: center;
+  padding: 20px;
+  width: 50%; /* Cover the full width */
+  margin: 25px auto;
+  z-index: 1000; /* Ensures it's above other items */
+  border-radius: 15px;
 }
 
 /* Category navigation styles */
@@ -66,17 +80,36 @@ html, body {
   cursor: pointer;
   transition: background-color 0.3s;
 }
+.answer-button {
+  display: inline-block;
+  padding: 5px 15px 3px 3px;
+  margin: 5px 5px;
+  text-indent: 15px;
+  border-radius: 50px; /* Pill shape */
+  background-color: teal; /* Lighter shade of blue */
+  color: white;
+  border-color: black;
+  border-width: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.answer-button:hover {
+  background-color: mediumaquamarine; /* Slightly darker on hover */
+}
+
 
 .badge:hover {
   background-color: #4169E1; /* Slightly darker on hover */
 }
 
 
+
+
 .content {
-
   padding-top: 1px; /* Adjust based on the total height of the fixed navbar and sub-nav */
-
 }
+
 .cardsContainer {
   display: flex;
   flex-wrap: wrap; /* Allows items to wrap to the next line */
@@ -90,9 +123,9 @@ html, body {
 }
 
 .card, .card-back {
-  background-color: #4169E1;
+  background-color: lightpink;
   box-shadow:0 4px 8px rgba(0,0,0,0.5);
-  color: white;
+  color: teal;
   border-radius: 10px;
 
   padding: 15px;
@@ -114,7 +147,6 @@ html, body {
   border-radius: 20px;
   flex-direction: column;
 }
-
 
 .card-back{
   color: black;

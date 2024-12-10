@@ -118,13 +118,9 @@ function App() {
     const handleClick=(category)=> {
       console.log(category)
       // filter all questions by category
-      if (category === "Random") {
-          setFilteredTriviaQuestions(triviaQuestions)
-      } else {
           // return only requested triviaQuestions
           const myFilteredCategoryQuestions = triviaQuestions.filter(questions => questions.category === category)
           setFilteredTriviaQuestions(myFilteredCategoryQuestions)
-      }
   }
 
   return (
@@ -133,7 +129,7 @@ function App() {
               <h1>Trivial Pursuit Game</h1>
           </div>
           <div className='container-lg'>
-              <div className='main-nav p-5'>Quick game: 6 questions, 1 from each category
+              <div className='game-type-nav'>Quick game: 6 questions, 1 from each category
                   <button onClick={
                       handleClick
                   }
@@ -141,13 +137,13 @@ function App() {
                       Click to Play Quick Game!
                   </button>
               </div>
-              <div className='main-nav p-5'>Expert category game: 6 questions from 1 category
+              <div className='game-type-nav'>Expert category game: 6 questions from 1 category
                   <button
                       className='main-nav-button'>
                       Click to Play Expert Game!
                   </button>
               </div>
-              <div className='main-nav p-5'>Full game: Answer 6 questions from each category
+              <div className='game-type-nav'>Full game: Answer 6 questions from each category
                   <button
                       className='main-nav-button'>
                       Click to Play Full Game!
@@ -177,7 +173,7 @@ function App() {
 
           </div>
           <div className="content">
-              {filteredTriviaQuestions.map(questions => {
+              {filteredTriviaQuestions.slice(0,1).map(questions => {
                   return (
 
                       <QCard
