@@ -15,7 +15,7 @@ html, body {
 .main-nav {
   height: 100px;
   top: 0;
-  background-color: lightpink; /* miami dolphins colors */
+  background-color: Green; /* Christmas colors */
   color: black;
   text-align: center;
   padding: 10px 0;
@@ -37,7 +37,7 @@ html, body {
 }
 
 .main-nav-button {
-  background-color: mediumaquamarine;
+  background-color: forestgreen;
   display: flex;
   align-items: center;
   color: white;
@@ -48,8 +48,8 @@ html, body {
 .game-type-nav {
   height: 100px;
   top: 0;
-  background-color: teal  ; /* Royal Blue */
-  color: white;
+  background-color: silver  ; /* Silver for tinsel */
+  color: black;
   text-align: center;
   padding: 20px;
   width: 50%; /* Cover the full width */
@@ -60,7 +60,7 @@ html, body {
 
 /* Category navigation styles */
 .category-nav {
-  background-color:lightseagreen; /* Dark contrasting background for category badges */
+  background-color: seagreen; /* Dark contrasting background for category badges */
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -86,8 +86,8 @@ html, body {
   margin: 5px 5px;
   text-indent: 15px;
   border-radius: 50px; /* Pill shape */
-  background-color: teal; /* Lighter shade of blue */
-  color: white;
+  background-color: gold; /* Lighter shade of blue */
+  color: black;
   border-color: black;
   border-width: 10px;
   cursor: pointer;
@@ -95,7 +95,7 @@ html, body {
 }
 
 .answer-button:hover {
-  background-color: mediumaquamarine; /* Slightly darker on hover */
+  background-color: darkgoldenrod; /* Slightly darker on hover */
 }
 
 
@@ -123,9 +123,9 @@ html, body {
 }
 
 .card, .card-back {
-  background-color: lightpink;
+  background-color: darkgreen;
   box-shadow:0 4px 8px rgba(0,0,0,0.5);
-  color: teal;
+  color: white;
   border-radius: 10px;
 
   padding: 15px;
@@ -149,8 +149,8 @@ html, body {
 }
 
 .card-back{
-  color: white;
-  background-color: teal;
+  color: black;
+  background-color: palegoldenrod;
   cursor: pointer;
 }
 

@@ -3,24 +3,29 @@
 import {useState} from "react";
 
 
-function QCard({category, question, answer1, answer2, answer3, answer4, answer5}) {
+function QCard({category, question, answer1, answer2, answer3, answer4, answer1Correct, answer2Correct, answer3Correct,
+                   answer4Correct}) {
 
-    const [showQuestion, setShowQuestion] = useState(false)
-    function handleClick(message) {
-        setShowQuestion(!showQuestion)
-        console.log(showQuestion)
-        console.log(message)
-    }
+    const [showQuestion, setShowQuestion] = useState(true)
+    const [showAnswer, setShowAnswer] = useState(false)
+    const [answered, setAnswered] =useState(false)
+
 
     function handleButtonClick(answer) {
-        console.log(answer)
+        setShowQuestion(showQuestion)
+        console.log('showing question ', showQuestion)
+        setShowAnswer(!showAnswer)
+        console.log('show answer ', answer)
+        console.log('did I answer question ', !answered)
+        setAnswered(!answered)
     }
+
+
     return (
-        <div onClick={
-            ()=>{ handleClick('check answer')}
-        }>
+        /* show the front of card and all answers */
+        <div>
             <div className="cardsContainer">
-                {showQuestion &&
+                {!answered &&
                 <div className="card" >
                     <p>Category: {category}</p>
                     <p>
@@ -47,7 +52,6 @@ function QCard({category, question, answer1, answer2, answer3, answer4, answer5}
                         {answer4}
                     </div>
 
-
                     <div>
                         <div className="category-button">Prev Question</div>
                         <div className="category-button">Next Question</div>
@@ -55,14 +59,24 @@ function QCard({category, question, answer1, answer2, answer3, answer4, answer5}
                     </div>
                 </div>
                 }
-                {/* show answer */}
-                { !showQuestion &&
+                {/* show back of card and show correct answer */}
+                {answered &&
                 <div className="card-back">
                     <p>
                     Question: {question}
                     </p>
-                    <div className="badge">Answer: {answer5}</div>
+
+
+                    { answer1Correct &&
+                        <div className="badge">Correct answer: {answer1} </div> }
+                    { answer2Correct &&
+                        <div className="badge">Correct answer: {answer2} </div> }
+                    { answer3Correct &&
+                        <div className="badge">Correct answer: {answer3} </div> }
+                    { answer4Correct &&
+                        <div className="badge">Correct answer: {answer4} </div> }
                 </div>}
+
             </div>
 
         </div>

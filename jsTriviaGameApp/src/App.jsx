@@ -3,6 +3,7 @@
 import './App.css'
 import './QCard.jsx'
 import QCard from "./QCard.jsx";
+import questions from "./Questions.jsx";
 import {useState} from "react";
 
 const categories = ['Geography', 'Entertainment', 'History', 'Arts & Literature', 'Science & Nature', 'Sports & Leisure'];
@@ -111,17 +112,22 @@ const triviaQuestions = [
 
 
 function App() {
-    const [filteredTriviaQuestions, setFilteredTriviaQuestions] = useState(triviaQuestions)
+    const [filteredQuestions, setFilteredQuestions] = useState(questions)
 
 
+  // const handleClick=(category)=> {
+  //     console.log(category)
+  //     // filter all questions by category
+  //         // return only requested triviaQuestions
+  //         const myFilteredCategoryQuestions = triviaQuestions.filter(questions => questions.category === category)
+  //         setFilteredTriviaQuestions(myFilteredCategoryQuestions)
+  // }
 
-    const handleClick=(category)=> {
-      console.log(category)
-      // filter all questions by category
-          // return only requested triviaQuestions
-          const myFilteredCategoryQuestions = triviaQuestions.filter(questions => questions.category === category)
-          setFilteredTriviaQuestions(myFilteredCategoryQuestions)
-  }
+    const handleClick = (category) => {
+        console.log(category)
+        const myFilteredCategoryQuestions = questions.filter(questions => questions.category === category)
+        setFilteredQuestions(myFilteredCategoryQuestions)
+    }
 
     const handleGameTypeClick=(gameType)=> {
         console.log(gameType)
@@ -177,18 +183,21 @@ function App() {
 
           </div>
           <div className="content">
-              {filteredTriviaQuestions.slice(0,1).map(questions => {
+              {filteredQuestions.map(questions => {
                   return (
 
                       <QCard
                           key={questions.question}
                           category={questions.category}
                           question={questions.question}
-                          answer1={questions.answer1}
-                          answer2={questions.answer2}
-                          answer3={questions.answer3}
-                          answer4={questions.answer4}
-                          answer5={questions.answer5}
+                          answer1 = {questions.choices[0].text}
+                          answer2 = {questions.choices[1].text}
+                          answer3 = {questions.choices[2].text}
+                          answer4 = {questions.choices[3].text}
+                          answer1Correct = {questions.choices[0].answer}
+                          answer2Correct = {questions.choices[1].answer}
+                          answer3Correct = {questions.choices[2].answer}
+                          answer4Correct = {questions.choices[3].answer}
                       />)
               })}
 
