@@ -17,6 +17,7 @@ function QCard({category, question, answer1, answer2, answer3, answer4, answer1C
         setShowAnswer(!showAnswer)
         console.log('show answer ', answer)
         console.log('did I answer question ', !answered)
+
         setAnswered(!answered)
     }
 
@@ -65,7 +66,7 @@ function QCard({category, question, answer1, answer2, answer3, answer4, answer1C
                     <p>
                     Question: {question}
                     </p>
-
+                    <div>Your answer </div>
 
                     { answer1Correct &&
                         <div className="badge">Correct answer: {answer1} </div> }
