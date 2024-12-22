@@ -6,23 +6,30 @@ import QCard from "./QCard.jsx";
 import questions from "./Questions.jsx";
 import {useState} from "react";
 
-const categories = ['Geography', 'Entertainment', 'History', 'Arts & Literature', 'Science & Nature', 'Sports & Leisure'];
-
+const categories = ['All', 'Geography', 'Entertainment', 'History', 'Arts & Literature', 'Science & Nature', 'Sports & Leisure'];
+const gameType = ['quick', 'expert', 'full'];
 
 
 function App() {
     const [filteredQuestions, setFilteredQuestions] = useState(questions)
-
+    const [selectGameType, setGameType] = useState(gameType)
 
 
     const handleClick = (category) => {
-        console.log(category)
-        const myFilteredCategoryQuestions = questions.filter(questions => questions.category === category)
-        setFilteredQuestions(myFilteredCategoryQuestions)
+        if (category === 'All') {
+            setFilteredQuestions(questions)
+        } else {
+            console.log(category)
+            const myFilteredCategoryQuestions = questions.filter(questions => questions.category === category)
+            setFilteredQuestions(myFilteredCategoryQuestions)
+        }
     }
 
-    const handleGameTypeClick=(gameType)=> {
-        console.log(gameType)
+    const handleGameTypeClick=(selectGameType, count, category)=> {
+        setGameType(selectGameType)
+        console.log('playing game type ', selectGameType)
+        console.log('number of questions ', count)
+        console.log('category ', category)
     }
 
   return (
@@ -33,25 +40,26 @@ function App() {
           <div className='container-lg'>
               <div className='game-type-nav'>Quick game: 6 questions, 1 from each category
                   <button
-                      className='main-nav-button' onClick={()=>handleGameTypeClick('quick')}>
+                      className='main-nav-button' onClick={()=>handleGameTypeClick('quick', 6, "All")}>
                       Click to Play Quick Game!
                   </button>
               </div>
               <div className='game-type-nav'>
                   Expert category game: 6 questions from 1 category
                   <button
-                      className='main-nav-button'  onClick={()=>handleGameTypeClick('expert')}>
+                      className='main-nav-button'  onClick={()=>handleGameTypeClick('expert', 6, "geography")}>
                       Click to Play Expert Game!
                   </button>
               </div>
               <div className='game-type-nav'>Full game: Answer 6 questions from each category
                   <button
-                      className='main-nav-button'  onClick={()=>handleGameTypeClick('full')}>
+                      className='main-nav-button'  onClick={()=>handleGameTypeClick('full', 36, "All")}>
                       Click to Play Full Game!
                   </button>
               </div>
           </div>
 
+          { (selectGameType.toString() === 'expert') &&
            <div className="cardsContainer cards">
               <h3>Select a category</h3>
 
@@ -71,9 +79,8 @@ function App() {
                   })}
 
               </div>
-
-
           </div>
+          }
           <div className="content">
               {filteredQuestions.map(questions => {
                   return (

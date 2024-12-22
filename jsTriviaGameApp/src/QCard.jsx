@@ -1,15 +1,30 @@
-// eslint-disable-next-line react/prop-types
+
 
 import {useState} from "react";
+// eslint-disable-next-line no-unused-vars
+import PropTypes from "prop-types";
 
-
-function QCard({category, question, answer1, answer2, answer3, answer4, answer1Correct, answer2Correct, answer3Correct,
+// eslint-disable-next-line no-unused-vars
+function QCard({key, category, question, answer1, answer2, answer3, answer4, answer1Correct, answer2Correct, answer3Correct,
                    answer4Correct}) {
 
     const [showQuestion, setShowQuestion] = useState(true)
     const [showAnswer, setShowAnswer] = useState(false)
     const [answered, setAnswered] =useState(false)
 
+QCard.propTypes = {
+        key: PropTypes.number,
+        category: PropTypes.string,
+        question: PropTypes.string,
+        answer1: PropTypes.string,
+        answer2: PropTypes.string,
+        answer3: PropTypes.string,
+        answer4: PropTypes.string,
+        answer1Correct: PropTypes.bool,
+        answer2Correct: PropTypes.bool,
+        answer3Correct: PropTypes.bool,
+        answer4Correct: PropTypes.bool
+}
 
     function handleButtonClick(answer) {
         setShowQuestion(showQuestion)
