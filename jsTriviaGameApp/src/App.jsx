@@ -30,6 +30,7 @@ function App() {
         console.log('playing game type ', selectGameType)
         console.log('number of questions ', count)
         console.log('category ', category)
+        handleClick(category)
     }
 
   return (
@@ -47,7 +48,7 @@ function App() {
               <div className='game-type-nav'>
                   Expert category game: 6 questions from 1 category
                   <button
-                      className='main-nav-button'  onClick={()=>handleGameTypeClick('expert', 6, "geography")}>
+                      className='main-nav-button'  onClick={()=>handleGameTypeClick('expert', 6, "All")}>
                       Click to Play Expert Game!
                   </button>
               </div>
@@ -58,6 +59,7 @@ function App() {
                   </button>
               </div>
           </div>
+
 
           { (selectGameType.toString() === 'expert') &&
            <div className="cardsContainer cards">
