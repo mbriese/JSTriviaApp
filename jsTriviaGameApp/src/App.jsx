@@ -13,7 +13,8 @@ const gameType = ['quick', 'expert', 'full'];
 function App() {
     const [filteredQuestions, setFilteredQuestions] = useState(questions)
     const [selectGameType, setGameType] = useState(gameType)
-
+    // Track current question index
+    const [questionIndex, setQuestionIndex] = useState(0)
 
     const handleClick = (category) => {
         if (category === 'All') {
@@ -33,6 +34,18 @@ function App() {
         handleClick(category)
     }
 
+
+    /* Go to the next question */
+    const nextQuestion = () => {
+        setQuestionIndex((prevQuestionIndex) => (prevQuestionIndex +1) %
+        questions.length);
+    };
+
+    const prevQuestion = () => {
+        setQuestionIndex((prevQuestionIndex) => (prevQuestionIndex -1) %
+        questions.length);
+    };
+
   return (
       <>
           <div className="main-nav">
@@ -41,47 +54,47 @@ function App() {
           <div className='container-lg'>
               <div className='game-type-nav'>Quick game: 6 questions, 1 from each category
                   <button
-                      className='main-nav-button' onClick={()=>handleGameTypeClick('quick', 6, "All")}>
+                      className='main-nav-button' onClick={() => handleGameTypeClick('quick', 6, "All")}>
                       Click to Play Quick Game!
                   </button>
               </div>
               <div className='game-type-nav'>
                   Expert category game: 6 questions from 1 category
                   <button
-                      className='main-nav-button'  onClick={()=>handleGameTypeClick('expert', 6, "All")}>
+                      className='main-nav-button' onClick={() => handleGameTypeClick('expert', 6, "All")}>
                       Click to Play Expert Game!
                   </button>
               </div>
               <div className='game-type-nav'>Full game: Answer 6 questions from each category
                   <button
-                      className='main-nav-button'  onClick={()=>handleGameTypeClick('full', 36, "All")}>
+                      className='main-nav-button' onClick={() => handleGameTypeClick('full', 36, "All")}>
                       Click to Play Full Game!
                   </button>
               </div>
           </div>
 
 
-          { (selectGameType.toString() === 'expert') &&
-           <div className="cardsContainer cards">
-              <h3>Select a category</h3>
+          {(selectGameType.toString() === 'expert') &&
+              <div className="cardsContainer cards">
+                  <h3>Select a category</h3>
 
-              <div className='category-nav'>
-                  {categories.map((category) => {
-                      return (
-                          <button className='category-button'
-                              key={category}
-                              onClick={
-                                  () => {
-                                      handleClick(category)
-                                  }
-                              }
-                          >{category}
-                          </button>
-                      )
-                  })}
+                  <div className='category-nav'>
+                      {categories.map((category) => {
+                          return (
+                              <button className='category-button'
+                                      key={category}
+                                      onClick={
+                                          () => {
+                                              handleClick(category)
+                                          }
+                                      }
+                              >{category}
+                              </button>
+                          )
+                      })}
 
+                  </div>
               </div>
-          </div>
           }
           <div className="content">
               {filteredQuestions.map(questions => {
@@ -91,16 +104,21 @@ function App() {
                           key={questions.question}
                           category={questions.category}
                           question={questions.question}
-                          answer1 = {questions.choices[0].text}
-                          answer2 = {questions.choices[1].text}
-                          answer3 = {questions.choices[2].text}
-                          answer4 = {questions.choices[3].text}
-                          answer1Correct = {questions.choices[0].answer}
-                          answer2Correct = {questions.choices[1].answer}
-                          answer3Correct = {questions.choices[2].answer}
-                          answer4Correct = {questions.choices[3].answer}
+                          answer0={questions.choices[0].text}
+                          answer1={questions.choices[1].text}
+                          answer2={questions.choices[2].text}
+                          answer3={questions.choices[3].text}
+                          answer0Correct={questions.choices[0].answer}
+                          answer1Correct={questions.choices[1].answer}
+                          answer2Correct={questions.choices[2].answer}
+                          answer3Correct={questions.choices[3].answer}
                       />)
               })}
+
+          </div>
+          <div>
+              <div className="category-button">Prev Question</div>
+              <div className="category-button">Next Question</div>
 
           </div>
       </>
