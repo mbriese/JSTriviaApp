@@ -7,12 +7,12 @@ import questions from "./Questions.jsx";
 import {useState} from "react";
 
 const categories = ['All', 'Geography', 'Entertainment', 'History', 'Arts & Literature', 'Science & Nature', 'Sports & Leisure'];
-const gameType = ['quick', 'expert', 'full'];
+const gameType = ['quick', 'expert', 'full', 'null'];
 
 
 function App() {
     const [filteredQuestions, setFilteredQuestions] = useState(questions)
-    const [selectGameType, setGameType] = useState(gameType)
+    const [selectGameType, setGameType] = useState('null')
     // Track current question index
     const [questionIndex, setQuestionIndex] = useState(0)
 
@@ -34,14 +34,12 @@ function App() {
         handleClick(category)
     }
 
-
-    /* Go to the next question */
-    const nextQuestion = () => {
+    const handleNextQuestion = () => {
         setQuestionIndex((prevQuestionIndex) => (prevQuestionIndex +1) %
         questions.length);
     };
 
-    const prevQuestion = () => {
+    const handlePrevQuestion = () => {
         setQuestionIndex((prevQuestionIndex) => (prevQuestionIndex -1) %
         questions.length);
     };
@@ -96,33 +94,33 @@ function App() {
                   </div>
               </div>
           }
-          <div className="content">
-              {filteredQuestions.map(questions => {
-                  return (
+          {(selectGameType.toString() !== 'null') &&
+              <div className="content">
+                  {filteredQuestions.slice(questionIndex, questionIndex+1).map((questions, questionIndex) => {
+                      return (
+                          <QCard
+                              key={questionIndex}
+                              id={questions.id}
+                              category={questions.category}
+                              question={questions.question}
+                              answer0={questions.choices[0].text}
+                              answer1={questions.choices[1].text}
+                              answer2={questions.choices[2].text}
+                              answer3={questions.choices[3].text}
+                              answer0Correct={questions.choices[0].answer}
+                              answer1Correct={questions.choices[1].answer}
+                              answer2Correct={questions.choices[2].answer}
+                              answer3Correct={questions.choices[3].answer}
+                          />)
+                  })}
+                  <div>
+                      <button onClick={handlePrevQuestion} disabled={questionIndex===0}>Prev Question</button>
+                      <button onClick={handleNextQuestion} disabled={questionIndex===6}>Next Question</button>
+                  </div>
+              </div>}
 
-                      <QCard
-                          key={questions.question}
-                          category={questions.category}
-                          question={questions.question}
-                          answer0={questions.choices[0].text}
-                          answer1={questions.choices[1].text}
-                          answer2={questions.choices[2].text}
-                          answer3={questions.choices[3].text}
-                          answer0Correct={questions.choices[0].answer}
-                          answer1Correct={questions.choices[1].answer}
-                          answer2Correct={questions.choices[2].answer}
-                          answer3Correct={questions.choices[3].answer}
-                      />)
-              })}
-
-          </div>
-          <div>
-              <div className="category-button">Prev Question</div>
-              <div className="category-button">Next Question</div>
-
-          </div>
       </>
   )
 }
 
-export default App
+export default App;

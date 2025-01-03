@@ -57,14 +57,14 @@ html, body {
 }
 /* differentiate between game type navbar styles */
 .game-type-nav {
-  height: 70px;
+  height: 150px;
   top: 0;
   background-color: silver  ; /* Silver for tinsel */
   color: black;
   text-align: center;
   padding: 20px;
   width: 50%; /* Cover the full width */
-  margin: 100px auto;
+  margin: 30px auto;
   z-index: 1000; /* Ensures it's above other items */
   border-radius: 15px;
 }

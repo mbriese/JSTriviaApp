@@ -1,11 +1,11 @@
 
 
 import {useState} from "react";
- 
+
 import PropTypes from "prop-types";
 
 // eslint-disable-next-line no-unused-vars
-function QCard({key, category, question, answer0, answer1, answer2, answer3, answer0Correct, answer1Correct, answer2Correct,
+function QCard({id, category, question, answer0, answer1, answer2, answer3, answer0Correct, answer1Correct, answer2Correct,
                    answer3Correct
                })
 {
@@ -13,9 +13,10 @@ function QCard({key, category, question, answer0, answer1, answer2, answer3, ans
     const [showQuestion, setShowQuestion] = useState(true)
     const [showAnswer, setShowAnswer] = useState(false)
     const [answered, setAnswered] =useState(false)
+    const [selectedQuestion, setSelectedQuestion] = useState(null)
 
 QCard.propTypes = {
-        key: PropTypes.number,
+        id: PropTypes.number,
         category: PropTypes.string,
         question: PropTypes.string,
         answer0: PropTypes.string,
@@ -34,7 +35,6 @@ QCard.propTypes = {
         setShowAnswer(!showAnswer)
         console.log('show answer ', answer)
         console.log('did I answer question ', !answered)
-
         setAnswered(!answered)
     }
 
