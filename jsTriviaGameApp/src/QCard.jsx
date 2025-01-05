@@ -13,7 +13,6 @@ function QCard({id, category, question, answer0, answer1, answer2, answer3, answ
     const [showQuestion, setShowQuestion] = useState(true)
     const [showAnswer, setShowAnswer] = useState(false)
     const [answered, setAnswered] =useState(false)
-    const [selectedQuestion, setSelectedQuestion] = useState(null)
 
 QCard.propTypes = {
         id: PropTypes.number,

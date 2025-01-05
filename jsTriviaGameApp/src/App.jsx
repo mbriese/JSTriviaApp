@@ -12,7 +12,7 @@ const gameType = ['quick', 'expert', 'full', 'null'];
 
 function App() {
     const [filteredQuestions, setFilteredQuestions] = useState(questions)
-    const [selectGameType, setGameType] = useState('null')
+    const [selectGameType, setGameType] = useState('')
     // Track current question index
     const [questionIndex, setQuestionIndex] = useState(0)
 
@@ -49,26 +49,32 @@ function App() {
           <div className="main-nav">
               <h1>Trivial Pursuit Game</h1>
           </div>
-          <div className='container-lg'>
-              <div className='game-type-nav'>Quick game: 6 questions, 1 from each category
+            <div className='container-lg'>
+                {(selectGameType.toString() === 'null') &&
+                  <div className='game-type-nav'>Quick game: 6 questions, 1 from each category
                   <button
                       className='main-nav-button' onClick={() => handleGameTypeClick('quick', 6, "All")}>
                       Click to Play Quick Game!
                   </button>
-              </div>
-              <div className='game-type-nav'>
+              </div>}
+
+                {(selectGameType.toString() === 'null') &&
+                    <div className='game-type-nav'>
                   Expert category game: 6 questions from 1 category
                   <button
                       className='main-nav-button' onClick={() => handleGameTypeClick('expert', 6, "All")}>
                       Click to Play Expert Game!
                   </button>
               </div>
+                }
+                {(selectGameType.toString() === 'null') &&
               <div className='game-type-nav'>Full game: Answer 6 questions from each category
                   <button
                       className='main-nav-button' onClick={() => handleGameTypeClick('full', 36, "All")}>
                       Click to Play Full Game!
                   </button>
               </div>
+                }
           </div>
 
 
