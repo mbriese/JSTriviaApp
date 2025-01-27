@@ -4,7 +4,7 @@ import {useState} from "react";
 
 import PropTypes from "prop-types";
 
-// eslint-disable-next-line no-unused-vars
+ 
 function QCard({id, category, question, answer0, answer1, answer2, answer3, answer0Correct, answer1Correct, answer2Correct,
                    answer3Correct
                })
@@ -13,6 +13,7 @@ function QCard({id, category, question, answer0, answer1, answer2, answer3, answ
     const [showQuestion, setShowQuestion] = useState(true)
     const [showAnswer, setShowAnswer] = useState(false)
     const [answered, setAnswered] =useState(false)
+
 
 QCard.propTypes = {
         id: PropTypes.number,
@@ -35,6 +36,7 @@ QCard.propTypes = {
         console.log('show answer ', answer)
         console.log('did I answer question ', !answered)
         setAnswered(!answered)
+
     }
 
 
@@ -45,6 +47,9 @@ QCard.propTypes = {
                 {!answered &&
                 <div className="card" >
                     <p>Category: {category}</p>
+                    <p>
+                        Question ID: {id}
+                    </p>
                     <p>
                         Question: {question}
                     </p>
@@ -70,11 +75,15 @@ QCard.propTypes = {
                     </div>
 
 
+
                 </div>
                 }
                 {/* show back of card and show correct answer */}
                 {answered &&
                 <div className="card-back">
+                    <p>
+                        Question number: {id}
+                    </p>
                     <p>
                     Question: {question}
                     </p>

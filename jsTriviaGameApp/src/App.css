@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  width: 100%;
+  width: 75%;
   font-family: 'Roboto', sans-serif;
   height: 100%;
   display: flex;
@@ -15,33 +15,46 @@ html, body {
 .main-nav {
   height: 100px;
   top: 0;
-  background-color: Green; /* Christmas colors */
-  color: black;
+  background-color: darkblue; /* Christmas colors */
+  color: white;
   text-align: center;
   padding: 10px 0;
-  width: 100%; /* Cover the full width */
+  width: 75%; /* Cover the full width */
   margin: 0 auto;
   z-index: 1000; /* Ensures it's above other items */
   border-radius: 15px;
 }
 
+.game-type-nav {
+  height: 100px;
+  top: 0;
+  background-color: darkslateblue;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  width: 75%; /* Cover the full width */
+  margin: 0 auto;
+  border-radius: 15px;
+}
 .main-nav h1 {
-  margin: 10px 0 0;
+  margin: 5px 0 0;
   font-size: 2em; /* Large title */
 }
 
 .main-nav p {
-  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
   font-style: italic;
-  height: 200px;
+  height: 30px;
 }
 
 .main-nav-button {
-  background-color: forestgreen;
+  background-color: mediumblue;
   display: flex;
   align-items: center;
   color: white;
   margin: 0 auto;
+  z-index: 1000;
 }
 
 .play-game-button {
@@ -50,10 +63,23 @@ html, body {
   text-align: center;
   align-items: center;
   color: white;
-  margin: 20px auto;
+  margin: 10px auto;
   width: 50%;
   padding: 20px;
   border-radius: 15px;
+}
+
+.navigate-questions-button {
+  height: 50px;
+  background-color: silver;
+  text-align: center;
+  align-items: center;
+  color: black;
+
+  margin: 10px auto;
+  width: 50%;
+  padding: 20px;
+  border-radius: 25px;
 }
 /* differentiate between game type navbar styles */
 .game-type-nav {
@@ -71,9 +97,9 @@ html, body {
 
 /* Category navigation styles */
 .category-nav {
-  background-color: seagreen; /* Dark contrasting background for category badges */
-  padding: 10px;
-  margin-top: 5px;
+  background-color: mediumpurple;
+  width: 100%;
+  margin-top: 0;
   margin-bottom: 5px;
   color:white;
 }
@@ -97,8 +123,8 @@ html, body {
   margin: 5px 5px;
   text-indent: 15px;
   border-radius: 50px; /* Pill shape */
-  background-color: gold; /* Lighter shade of blue */
-  color: black;
+  background-color: #ff9e00;
+  color: white;
   border-color: black;
   border-width: 10px;
   cursor: pointer;
@@ -106,37 +132,54 @@ html, body {
 }
 
 .answer-button:hover {
-  background-color: darkgoldenrod; /* Slightly darker on hover */
+  background-color: #f7b64e; /* Slightly darker on hover */
 }
-
 
 .badge:hover {
   background-color: #4169E1; /* Slightly darker on hover */
 }
 
-
-
-
 .content {
   padding-top: 1px; /* Adjust based on the total height of the fixed navbar and sub-nav */
 }
 
-.cardsContainer {
+.container {
   display: flex;
+  background-color: #3f37c9;
   flex-wrap: wrap; /* Allows items to wrap to the next line */
   width: auto;
   gap: 20px; /* Adjust the space between cards */
   row-gap: 5px;
-  padding: 20px; /* Padding around the entire grid */
+  padding: 5px; /* Padding around the entire grid */
   justify-content: center; /* Center items in the container */
-  margin-top: 50px;
-  margin-bottom: 20px;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 100px;
+  color: white;
+  z-index: 1000;
+  border-radius: 10px;
+}
+
+.cardsContainer {
+  display: flex;
+  background-color: darkblue;
+  flex-wrap: wrap; /* Allows items to wrap to the next line */
+  width: 100%;
+  gap: 20px; /* Adjust the space between cards */
+  row-gap: 5px;
+  padding: 5px; /* Padding around the entire grid */
+  justify-content: center; /* Center items in the container */
+  margin-top: 12px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  color: white;
+  z-index: 1000;
 }
 
 .card, .card-back {
-  background-color: darkgreen;
+  background-color: green;
   box-shadow:0 4px 8px rgba(0,0,0,0.5);
-  color: white;
+  color: blue;
   border-radius: 10px;
 
   padding: 15px;
@@ -167,7 +210,7 @@ html, body {
 
 .card:hover {
   transform: scale(1.05);
-  background-color: #6A9AE2;
+  background-color: mediumslateblue;
   cursor: pointer;
 }
 
@@ -177,7 +220,7 @@ html, body {
   margin: 5px 5px;
   color: white;
   font-weight: bold;
-  background-color: black;
+  background-color: mediumblue;
   border-radius: 50px;
 }
 
