@@ -3,9 +3,10 @@ import './QCard.jsx'
 import QCard from "./QCard.jsx";
 import questions from "./Questions.jsx";
 
-import {useState} from "react";
-import Accordian from "./components/Accordian.jsx";
-import AccordianSection from "./components/AccordianSection.jsx"
+import {useState, useEffect, useCallback} from "react";
+
+import Accordion from "./components/Accordion.jsx";
+import AccordionSection from "./components/AccordionSection.jsx"
 
 
 const categories = ['All', 'Geography', 'Entertainment', 'History', 'Arts & Literature',
@@ -17,8 +18,12 @@ function App() {
     const [gameType, setGameType] = useState('')
     // Track current question index
     const [questionIndex, setQuestionIndex] = useState(0)
+    const [isQuickGameClicked, setIsQuickGameClicked] = useState(false);
+    const [isExpertGameClicked, setIsExpertGameClicked] = useState(false);
+    const [isFullGameClicked, setIsFullGameClicked] = useState(false);
 
-    const handleClick = (category) => {
+
+    const handleClick = useCallback((category) => {
         if (category === 'All') {
             setFilteredQuestions(questions)
         } else {
@@ -26,17 +31,53 @@ function App() {
             const myFilteredCategoryQuestions = questions.filter(questions => questions.category === category)
             setFilteredQuestions(myFilteredCategoryQuestions)
         }
-    }
+    }, []);
 
-    const handleGameTypeClick = (gameType, count, category) => {
+    const handleGameTypeClick = useCallback((gameType, count, category) => {
         setGameType(gameType)
         setQuestionIndex(0)
         console.log('playing game type ', gameType)
         console.log('question index ', questionIndex)
         console.log('number of questions ', count)
         console.log('category ', category)
-        handleClick(category)
-    }
+        handleClick(category);
+    }, [handleClick, questionIndex]);
+
+    useEffect(() => {
+        if (isQuickGameClicked) {
+            handleGameTypeClick('quick', 6, 'All');
+        }
+    }, [isQuickGameClicked, handleGameTypeClick]);
+
+    useEffect(() => {
+        if (isExpertGameClicked) {
+            handleGameTypeClick('expert', 6, 'All');
+        }
+    }, [isExpertGameClicked, handleGameTypeClick]);
+
+    useEffect(() => {
+        if (isFullGameClicked) {
+            handleGameTypeClick('full', 36, 'All');
+        }
+    }, [isFullGameClicked, handleGameTypeClick]);
+
+    const handleQuickGameClick = () => {
+        setIsQuickGameClicked(true);
+        setIsExpertGameClicked(false);
+        setIsFullGameClicked(false);
+    };
+
+    const handleExpertGameClick = () => {
+        setIsQuickGameClicked(false);
+        setIsExpertGameClicked(true);
+        setIsFullGameClicked(false);
+    };
+
+    const handleFullGameClick = () => {
+        setIsQuickGameClicked(false);
+        setIsExpertGameClicked(false);
+        setIsFullGameClicked(true);
+    };
 
     const handleNextQuestion = () => {
         setQuestionIndex((prevQuestionIndex) => (prevQuestionIndex + 1) %
@@ -55,37 +96,37 @@ function App() {
 
                 <p>Select Game Type</p>
                 <div className="container">
-                    <Accordian allowMultipleOpen>
-                        <AccordianSection label='Quick Game' isOpen onClick={onclick}>
+                    <Accordion allowMultipleOpen>
+                        <AccordionSection label='Quick Game' isOpen onClick={onclick}>
                             <p>
                                 <strong>Quick game: 6 questions, 1 from each category</strong>
                             </p>
                             <button
-                                className='main-nav-button' onClick={() => handleGameTypeClick('quick', 6,
+                                className='main-nav-button' onClick={() => handleQuickGameClick('quick', 6,
                                 "All")}>
                                 Click to Play Quick Game!
                             </button>
-                        </AccordianSection>
-                        <AccordianSection label='Expert Game' isOpen onClick={onclick}>
+                        </AccordionSection>
+                        <AccordionSection label='Expert Game' isOpen onClick={onclick}>
                             <p>
                                 <strong>Expert category game: 6 questions from 1 category</strong>
                             </p>
                             <button
-                                className='main-nav-button' onClick={() => handleGameTypeClick('expert',
+                                className='main-nav-button' onClick={() => handleExpertGameClick('expert',
                                 6, "All")}>
                                 Click button to select your category!
                             </button>
-                        </AccordianSection>
-                        <AccordianSection label='Full Game' isOpen onClick={onclick}>
+                        </AccordionSection>
+                        <AccordionSection label='Full Game' isOpen onClick={onclick}>
                             <p>
                                 <strong>Full game: Answer 36 questions</strong>
                             </p>
                             <button
-                                className='main-nav-button' onClick={() => handleGameTypeClick('full', 36, "All")}>
+                                className='main-nav-button' onClick={() => handleFullGameClick('full', 36, "All")}>
                                 Click to Play Full Game!
                             </button>
-                        </AccordianSection>
-                    </Accordian>
+                        </AccordionSection>
+                    </Accordion>
                 </div>
             </div>
 
@@ -112,7 +153,7 @@ function App() {
                     </div>
                 </div>
             }
-            {(gameType.toString() === 'null') &&
+            {(gameType.toString() !== 'null') &&
                 <div className="content">
                     {filteredQuestions.slice(questionIndex, questionIndex + 1).map((questions, questionIndex) => {
                         return (

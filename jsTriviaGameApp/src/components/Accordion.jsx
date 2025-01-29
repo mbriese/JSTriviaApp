@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import AccordianSection from "./AccordianSection.jsx";
+import AccordionSection from "./AccordionSection.jsx";
 
-class Accordian extends React.Component {
+
+class Accordion extends React.Component {
     static propTypes = {
         children: PropTypes.instanceOf(Object).isRequired,
     };
@@ -38,20 +39,20 @@ class Accordian extends React.Component {
         return (
             <div style={{border: '2px solid #008f68'}}>
                 {children.map((child, index) => (
-                    <AccordianSection
-                        key={`accordian-section-${index}`}
+                    <AccordionSection
+                        key={`accordion-section-${index}`}
                         isOpen={!!openSections[child.props.label]}
                         label={child.props.label}
                         onClick={onClick}
                     >
                         {child.props.children}
-                    </AccordianSection>
+                    </AccordionSection>
                 ))}
             </div>
 
         );
     };
-    AccordianSection = AccordianSection;
+    AccordionSection = AccordionSection;
 }
 
-export default Accordian;
+export default Accordion;

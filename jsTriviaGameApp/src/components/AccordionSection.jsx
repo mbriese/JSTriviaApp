@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from "prop-types";
 
-class AccordianSection extends React.Component {
+class AccordionSection extends React.Component {
     static propTypes = {
         children: PropTypes.instanceOf(Object).isRequired,
         isOpen: PropTypes.bool.isRequired,
@@ -53,4 +53,4 @@ class AccordianSection extends React.Component {
     }
 }
 
-export default AccordianSection;
+export default AccordionSection;
