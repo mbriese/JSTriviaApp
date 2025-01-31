@@ -15,7 +15,6 @@ function QCard({
                    answer1Correct,
                    answer2Correct,
                    answer3Correct,
-                   questionIndex,
                }) {
 
     const [showQuestion, setShowQuestion] = useState(true)
@@ -38,15 +37,10 @@ function QCard({
         questionIndex: PropTypes.number,
     }
 
-    function handleButtonClick(answer) {
-        console.log('inside QCard and clicking button')
+    function handleButtonClick() {
         setShowQuestion(showQuestion)
-        console.log('showing question ', showQuestion)
         setShowAnswer(!showAnswer)
-        console.log('show answer ', answer)
-        console.log('did I answer question ', !answered)
         setAnswered(!answered)
-        console.log('question index ', questionIndex)
     }
 
 

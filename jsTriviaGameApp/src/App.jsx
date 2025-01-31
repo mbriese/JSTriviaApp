@@ -14,10 +14,9 @@ const categories = ['All', 'Geography', 'Entertainment', 'History', 'Arts & Lite
 
 
 function App() {
-    const [filteredQuestions, setFilteredQuestions] = useState(questions)
+    const [filteredQuestions, setFilteredQuestions] = useState(questions);
     // Track current question index
-    const [questionIndex, setQuestionIndex] = useState(0)
-    const [prevQuestionIndex, setPrevQuestionIndex] = useState(0);
+    const [questionIndex, setQuestionIndex] = useState(0);
     const [isQuickGameClicked, setIsQuickGameClicked] = useState(false);
     const [isExpertGameClicked, setIsExpertGameClicked] = useState(false);
     const [isFullGameClicked, setIsFullGameClicked] = useState(false);
@@ -26,30 +25,20 @@ function App() {
     const handleClick = useCallback((category) => {
         if (category === 'All') {
             setFilteredQuestions(questions)
-            console.log(questions)
         } else {
-            console.log(category)
             const myFilteredCategoryQuestions = questions.filter(questions => questions.category === category)
             setFilteredQuestions(myFilteredCategoryQuestions)
-            console.log(myFilteredCategoryQuestions)
         }
     }, []);
 
     const handleGameTypeClick = useCallback((count, category) => {
-        // setQuestionIndex(0)
-        console.log('question index ', questionIndex)
-        console.log('number of questions ', count)
-        console.log('category ', category)
         handleClick(category);
         let myFilteredQuestions = questions;
         if (category === 'All') {
             setFilteredQuestions(questions)
-            console.log(questions)
         } else {
-            console.log(category)
-            let myFilteredCategoryQuestions = questions.filter(questions => questions.category === category)
+            myFilteredQuestions = questions.filter(questions => questions.category === category)
             setFilteredQuestions(myFilteredQuestions)
-            console.log(myFilteredCategoryQuestions)
         }
         if (count === 6) {
             myFilteredQuestions = filteredQuestions.slice(0, 6);
@@ -99,15 +88,11 @@ function App() {
     };
 
     const handleNextQuestion = () => {
-        console.log('handle next question button - question index is', questionIndex)
         let newQuestionIndex = questionIndex + 1;
         if (newQuestionIndex >= filteredQuestions.length) {
             newQuestionIndex = 0;
         }
-        console.log('new question index is ', newQuestionIndex)
         setQuestionIndex(newQuestionIndex);
-        setPrevQuestionIndex(questionIndex);
-        console.log('prev question index ', prevQuestionIndex)
     };
 
     const handlePrevQuestion = () => {
@@ -115,15 +100,11 @@ function App() {
         if (newQuestionIndex < 0) {
             newQuestionIndex = filteredQuestions.length - 1;
         }
-        console.log('new question index is ', newQuestionIndex)
         setQuestionIndex(newQuestionIndex);
-        setPrevQuestionIndex(questionIndex);
-        console.log('prev question index ', prevQuestionIndex)
     };
 
     return (
         <>
-
         { !isGameSelected &&
             <div className="main-nav">
                 <h2> Lets Play Trivial Pursuit </h2>
