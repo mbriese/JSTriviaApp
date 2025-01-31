@@ -15,49 +15,65 @@ const categories = ['All', 'Geography', 'Entertainment', 'History', 'Arts & Lite
 
 function App() {
     const [filteredQuestions, setFilteredQuestions] = useState(questions)
-    const [gameType, setGameType] = useState('')
     // Track current question index
     const [questionIndex, setQuestionIndex] = useState(0)
+    const [prevQuestionIndex, setPrevQuestionIndex] = useState(0);
     const [isQuickGameClicked, setIsQuickGameClicked] = useState(false);
     const [isExpertGameClicked, setIsExpertGameClicked] = useState(false);
     const [isFullGameClicked, setIsFullGameClicked] = useState(false);
-
+    const [isGameSelected, setIsGameSelected] = useState(false);
 
     const handleClick = useCallback((category) => {
         if (category === 'All') {
             setFilteredQuestions(questions)
+            console.log(questions)
         } else {
             console.log(category)
             const myFilteredCategoryQuestions = questions.filter(questions => questions.category === category)
             setFilteredQuestions(myFilteredCategoryQuestions)
+            console.log(myFilteredCategoryQuestions)
         }
     }, []);
 
-    const handleGameTypeClick = useCallback((gameType, count, category) => {
-        setGameType(gameType)
-        setQuestionIndex(0)
-        console.log('playing game type ', gameType)
+    const handleGameTypeClick = useCallback((count, category) => {
+        // setQuestionIndex(0)
         console.log('question index ', questionIndex)
         console.log('number of questions ', count)
         console.log('category ', category)
         handleClick(category);
-    }, [handleClick, questionIndex]);
+        let myFilteredQuestions = questions;
+        if (category === 'All') {
+            setFilteredQuestions(questions)
+            console.log(questions)
+        } else {
+            console.log(category)
+            let myFilteredCategoryQuestions = questions.filter(questions => questions.category === category)
+            setFilteredQuestions(myFilteredQuestions)
+            console.log(myFilteredCategoryQuestions)
+        }
+        if (count === 6) {
+            myFilteredQuestions = filteredQuestions.slice(0, 6);
+        } else {
+            myFilteredQuestions = filteredQuestions;
+        }
+        setIsGameSelected(true);
+    }, []);
 
     useEffect(() => {
         if (isQuickGameClicked) {
-            handleGameTypeClick('quick', 6, 'All');
+            handleGameTypeClick( 6, 'All');
         }
     }, [isQuickGameClicked, handleGameTypeClick]);
 
     useEffect(() => {
         if (isExpertGameClicked) {
-            handleGameTypeClick('expert', 6, 'All');
+            handleGameTypeClick( 6, 'All');
         }
     }, [isExpertGameClicked, handleGameTypeClick]);
 
     useEffect(() => {
         if (isFullGameClicked) {
-            handleGameTypeClick('full', 36, 'All');
+            handleGameTypeClick( 36, 'All');
         }
     }, [isFullGameClicked, handleGameTypeClick]);
 
@@ -65,32 +81,50 @@ function App() {
         setIsQuickGameClicked(true);
         setIsExpertGameClicked(false);
         setIsFullGameClicked(false);
+        setIsGameSelected(true);
     };
 
     const handleExpertGameClick = () => {
         setIsQuickGameClicked(false);
         setIsExpertGameClicked(true);
         setIsFullGameClicked(false);
+        setIsGameSelected(true);
     };
 
     const handleFullGameClick = () => {
         setIsQuickGameClicked(false);
         setIsExpertGameClicked(false);
         setIsFullGameClicked(true);
+        setIsGameSelected(true);
     };
 
     const handleNextQuestion = () => {
-        setQuestionIndex((prevQuestionIndex) => (prevQuestionIndex + 1) %
-            questions.length);
+        console.log('handle next question button - question index is', questionIndex)
+        let newQuestionIndex = questionIndex + 1;
+        if (newQuestionIndex >= filteredQuestions.length) {
+            newQuestionIndex = 0;
+        }
+        console.log('new question index is ', newQuestionIndex)
+        setQuestionIndex(newQuestionIndex);
+        setPrevQuestionIndex(questionIndex);
+        console.log('prev question index ', prevQuestionIndex)
     };
 
     const handlePrevQuestion = () => {
-        setQuestionIndex((prevQuestionIndex) => (prevQuestionIndex - 1) %
-            questions.length);
+        let newQuestionIndex = questionIndex - 1;
+        if (newQuestionIndex < 0) {
+            newQuestionIndex = filteredQuestions.length - 1;
+        }
+        console.log('new question index is ', newQuestionIndex)
+        setQuestionIndex(newQuestionIndex);
+        setPrevQuestionIndex(questionIndex);
+        console.log('prev question index ', prevQuestionIndex)
     };
 
     return (
         <>
+
+        { !isGameSelected &&
             <div className="main-nav">
                 <h2> Lets Play Trivial Pursuit </h2>
 
@@ -103,7 +137,7 @@ function App() {
                             </p>
                             <button
                                 className='main-nav-button' onClick={() => handleQuickGameClick('quick', 6,
-                                "All")}>
+                                'All')}>
                                 Click to Play Quick Game!
                             </button>
                         </AccordionSection>
@@ -113,7 +147,7 @@ function App() {
                             </p>
                             <button
                                 className='main-nav-button' onClick={() => handleExpertGameClick('expert',
-                                6, "All")}>
+                                6, 'All')}>
                                 Click button to select your category!
                             </button>
                         </AccordionSection>
@@ -122,16 +156,17 @@ function App() {
                                 <strong>Full game: Answer 36 questions</strong>
                             </p>
                             <button
-                                className='main-nav-button' onClick={() => handleFullGameClick('full', 36, "All")}>
+                                className='main-nav-button' onClick={() => handleFullGameClick('full', 36, 'All')}>
                                 Click to Play Full Game!
                             </button>
                         </AccordionSection>
                     </Accordion>
                 </div>
             </div>
+        }
 
 
-            {(gameType.toString() === 'expert') &&
+            {!isGameSelected && isExpertGameClicked &&
                 <div className="cardsContainer cards">
                     <div className='container'>Select your category</div>
                     <div className="cardsContainer">
@@ -153,31 +188,38 @@ function App() {
                     </div>
                 </div>
             }
-            {(gameType.toString() !== 'null') &&
+
+            {isGameSelected &&
                 <div className="content">
-                    {filteredQuestions.slice(questionIndex, questionIndex + 1).map((questions, questionIndex) => {
-                        return (
+                    {filteredQuestions.length > 0 && (
                             <QCard
-                                key={questionIndex}
-                                id={questions.id}
-                                category={questions.category}
-                                question={questions.question}
-                                answer0={questions.choices[0].text}
-                                answer1={questions.choices[1].text}
-                                answer2={questions.choices[2].text}
-                                answer3={questions.choices[3].text}
-                                answer0Correct={questions.choices[0].answer}
-                                answer1Correct={questions.choices[1].answer}
-                                answer2Correct={questions.choices[2].answer}
-                                answer3Correct={questions.choices[3].answer}
+                                key={filteredQuestions.at(questionIndex).id}
+                                id={filteredQuestions.at(questionIndex).id}
+                                category={filteredQuestions.at(questionIndex).category}
+                                question={filteredQuestions.at(questionIndex).question}
+                                answer0={filteredQuestions.at(questionIndex).choices[0].text}
+                                answer1={filteredQuestions.at(questionIndex).choices[1].text}
+                                answer2={filteredQuestions.at(questionIndex).choices[2].text}
+                                answer3={filteredQuestions.at(questionIndex).choices[3].text}
+                                answer0Correct={filteredQuestions.at(questionIndex).choices[0].answer}
+                                answer1Correct={filteredQuestions.at(questionIndex).choices[1].answer}
+                                answer2Correct={filteredQuestions.at(questionIndex).choices[2].answer}
+                                answer3Correct={filteredQuestions.at(questionIndex).choices[3].answer}
+                                questionIndex={questionIndex}
+                                filteredQuestions={filteredQuestions}
+                                onNextQuestion={handleNextQuestion}
+                                onPrevQuestion={handlePrevQuestion}
                             />)
-                    })}
+                    }
                     <div>
-                        <button className='navigate-questions-button' onClick={handlePrevQuestion}
+                        <button className='navigate-questions-button'
+                                onClick={handlePrevQuestion}
                                 disabled={questionIndex <= 0}>Prev Question
                         </button>
-                        <button className='navigate-questions-button' onClick={handleNextQuestion}
-                                disabled={questionIndex >= 6}>Next Question
+                        <button
+                                className='navigate-questions-button'
+                                onClick={handleNextQuestion}
+                                disabled={questionIndex >= filteredQuestions.length - 1}>Next Question
                         </button>
                     </div>
                 </div>}
