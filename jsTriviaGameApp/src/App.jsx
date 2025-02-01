@@ -22,6 +22,7 @@ function App() {
     const [isFullGameClicked, setIsFullGameClicked] = useState(false);
     const [isGameSelected, setIsGameSelected] = useState(false);
 
+
     const handleClick = useCallback((category) => {
         if (category === 'All') {
             setFilteredQuestions(questions)

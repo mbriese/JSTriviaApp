@@ -20,7 +20,10 @@ function QCard({
     const [showQuestion, setShowQuestion] = useState(true)
     const [showAnswer, setShowAnswer] = useState(false)
     const [answered, setAnswered] = useState(false)
-
+    const [showScore, setShowScore] = useState(false);
+    const [score, setScore] = useState(0);
+    const [selectedAnswer, setSelectedAnswer] = useState(null);
+    const [isCorrect, setIsCorrect] = useState(false);
 
     QCard.propTypes = {
         id: PropTypes.number,
@@ -37,16 +40,36 @@ function QCard({
         questionIndex: PropTypes.number,
     }
 
-    function handleButtonClick() {
-        setShowQuestion(showQuestion)
-        setShowAnswer(!showAnswer)
-        setAnswered(!answered)
+    function handleButtonClick(answer) {
+        setShowQuestion(showQuestion);
+        setShowAnswer(!showAnswer);
+        setAnswered(!answered);
+        setSelectedAnswer(answer);
+
+        // was the answer correct?
+        if (
+            (answer === 'answer0' && answer0Correct) ||
+            (answer === 'answer1' && answer1Correct) ||
+            (answer === 'answer2' && answer2Correct) ||
+            (answer === 'answer3' && answer3Correct)
+        ) {
+            setScore(score + 1);
+            setIsCorrect(true); }
+           else {
+             setIsCorrect(false);
+        }
     }
 
 
     return (
         /* show the front of card and all answers */
         <div>
+            <div
+                className='scoreContainer'>
+                Display Score Here
+                Score: {score}
+                Total score: {score}
+            </div>
             <div className="cardsContainer">
                 {!answered &&
                     <div className="card">
@@ -96,7 +119,13 @@ function QCard({
                         <p>
                             Question: {question}
                         </p>
-                        <div>Your answer</div>
+                        <div>
+                            Your answer: {selectedAnswer === "answer0"?
+                                answer0: selectedAnswer === "answer1"?
+                                answer1: selectedAnswer === "answer2"?
+                                answer2: selectedAnswer === "answer3"?
+                                answer3: ""}
+                        </div>
 
                         {answer0Correct &&
                             <div className="badge">Correct answer: {answer0} </div>}
