@@ -20,7 +20,6 @@ function QCard({
     const [showQuestion, setShowQuestion] = useState(true)
     const [showAnswer, setShowAnswer] = useState(false)
     const [answered, setAnswered] = useState(false)
-    const [showScore, setShowScore] = useState(false);
     const [score, setScore] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [isCorrect, setIsCorrect] = useState(false);
@@ -63,13 +62,19 @@ function QCard({
 
     return (
         /* show the front of card and all answers */
-        <div>
-            <div
+        <div className='container'>
+            {isCorrect && <div
                 className='scoreContainer'>
                 Display Score Here
                 Score: {score}
-                Total score: {score}
-            </div>
+                You are correct!
+            </div>}
+            {!isCorrect && <div
+                className='scoreContainer'>
+                Display Score Here
+                Score: {score}
+                Incorrect answer!
+            </div>}
             <div className="cardsContainer">
                 {!answered &&
                     <div className="card">
