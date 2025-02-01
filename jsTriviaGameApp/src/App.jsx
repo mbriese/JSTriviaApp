@@ -22,7 +22,6 @@ function App() {
     const [isFullGameClicked, setIsFullGameClicked] = useState(false);
     const [isGameSelected, setIsGameSelected] = useState(false);
 
-
     const handleClick = useCallback((category) => {
         if (category === 'All') {
             setFilteredQuestions(questions)
@@ -43,11 +42,10 @@ function App() {
         }
         if (count === 6) {
             myFilteredQuestions = filteredQuestions.slice(0, 6);
-        } else {
-            myFilteredQuestions = filteredQuestions;
         }
+        setFilteredQuestions(myFilteredQuestions)
         setIsGameSelected(true);
-    }, []);
+    }, [handleClick, filteredQuestions]);
 
     useEffect(() => {
         if (isQuickGameClicked) {
@@ -87,6 +85,8 @@ function App() {
         setIsFullGameClicked(true);
         setIsGameSelected(true);
     };
+
+
 
     const handleNextQuestion = () => {
         let newQuestionIndex = questionIndex + 1;
@@ -148,7 +148,7 @@ function App() {
         }
 
 
-            {!isGameSelected && isExpertGameClicked &&
+            {isGameSelected && isExpertGameClicked &&
                 <div className="cardsContainer cards">
                     <div className='container'>Select your category</div>
                     <div className="cardsContainer">
