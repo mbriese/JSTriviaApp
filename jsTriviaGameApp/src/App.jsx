@@ -47,25 +47,26 @@ function App() {
         setIsGameSelected(true);
     }, [handleClick, filteredQuestions]);
 
-    useEffect(() => {
-        if (isQuickGameClicked) {
-            handleGameTypeClick( 6, 'All');
-        }
-    }, [isQuickGameClicked, handleGameTypeClick]);
-
-    useEffect(() => {
-        if (isExpertGameClicked) {
-            handleGameTypeClick( 6, 'All');
-        }
-    }, [isExpertGameClicked, handleGameTypeClick]);
-
-    useEffect(() => {
-        if (isFullGameClicked) {
-            handleGameTypeClick( 36, 'All');
-        }
-    }, [isFullGameClicked, handleGameTypeClick]);
+    // useEffect(() => {
+    //     if (isQuickGameClicked) {
+    //         handleGameTypeClick( 6, 'All');
+    //     }
+    // }, [isQuickGameClicked, handleGameTypeClick]);
+    //
+    // useEffect(() => {
+    //     if (isExpertGameClicked) {
+    //         handleGameTypeClick( 6, 'All');
+    //     }
+    // }, [isExpertGameClicked, handleGameTypeClick]);
+    //
+    // useEffect(() => {
+    //     if (isFullGameClicked) {
+    //         handleGameTypeClick( 36, 'All');
+    //     }
+    // }, [isFullGameClicked, handleGameTypeClick]);
 
     const handleQuickGameClick = () => {
+        handleGameTypeClick(6, 'All');
         setIsQuickGameClicked(true);
         setIsExpertGameClicked(false);
         setIsFullGameClicked(false);
@@ -73,6 +74,7 @@ function App() {
     };
 
     const handleExpertGameClick = () => {
+        handleGameTypeClick(6, 'All');
         setIsQuickGameClicked(false);
         setIsExpertGameClicked(true);
         setIsFullGameClicked(false);
@@ -80,6 +82,7 @@ function App() {
     };
 
     const handleFullGameClick = () => {
+        handleGameTypeClick(36, 'All');
         setIsQuickGameClicked(false);
         setIsExpertGameClicked(false);
         setIsFullGameClicked(true);
@@ -113,7 +116,7 @@ function App() {
                 <p>Select Game Type</p>
                 <div className="container">
                     <Accordion allowMultipleOpen>
-                        <AccordionSection label='Quick Game' isOpen onClick={onclick}>
+                        <AccordionSection label='Quick Game' isOpen onClick={handleQuickGameClick}>
                             <p>
                                 <strong>Quick game: 6 questions, 1 from each category</strong>
                             </p>
@@ -123,7 +126,7 @@ function App() {
                                 Click to Play Quick Game!
                             </button>
                         </AccordionSection>
-                        <AccordionSection label='Expert Game' isOpen onClick={onclick}>
+                        <AccordionSection label='Expert Game' isOpen onClick={handleExpertGameClick}>
                             <p>
                                 <strong>Expert category game: 6 questions from 1 category</strong>
                             </p>
@@ -133,7 +136,7 @@ function App() {
                                 Click button to select your category!
                             </button>
                         </AccordionSection>
-                        <AccordionSection label='Full Game' isOpen onClick={onclick}>
+                        <AccordionSection label='Full Game' isOpen onClick={handleFullGameClick}>
                             <p>
                                 <strong>Full game: Answer 36 questions</strong>
                             </p>
