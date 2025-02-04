@@ -3,7 +3,7 @@ import './QCard.jsx'
 import QCard from "./QCard.jsx";
 import questions from "./Questions.jsx";
 
-import {useState, useEffect, useCallback} from "react";
+import {useState, useCallback} from "react";
 
 import Accordion from "./components/Accordion.jsx";
 import AccordionSection from "./components/AccordionSection.jsx"
@@ -17,10 +17,8 @@ function App() {
     const [filteredQuestions, setFilteredQuestions] = useState(questions);
     // Track current question index
     const [questionIndex, setQuestionIndex] = useState(0);
-    const [isQuickGameClicked, setIsQuickGameClicked] = useState(false);
-    const [isExpertGameClicked, setIsExpertGameClicked] = useState(false);
-    const [isFullGameClicked, setIsFullGameClicked] = useState(false);
     const [isGameSelected, setIsGameSelected] = useState(false);
+    const [expertGameType, setExpertGameType] = useState(false);
 
     const handleClick = useCallback((category) => {
         if (category === 'All') {
@@ -47,49 +45,21 @@ function App() {
         setIsGameSelected(true);
     }, [handleClick, filteredQuestions]);
 
-    // useEffect(() => {
-    //     if (isQuickGameClicked) {
-    //         handleGameTypeClick( 6, 'All');
-    //     }
-    // }, [isQuickGameClicked, handleGameTypeClick]);
-    //
-    // useEffect(() => {
-    //     if (isExpertGameClicked) {
-    //         handleGameTypeClick( 6, 'All');
-    //     }
-    // }, [isExpertGameClicked, handleGameTypeClick]);
-    //
-    // useEffect(() => {
-    //     if (isFullGameClicked) {
-    //         handleGameTypeClick( 36, 'All');
-    //     }
-    // }, [isFullGameClicked, handleGameTypeClick]);
-
     const handleQuickGameClick = () => {
         handleGameTypeClick(6, 'All');
-        setIsQuickGameClicked(true);
-        setIsExpertGameClicked(false);
-        setIsFullGameClicked(false);
         setIsGameSelected(true);
     };
 
     const handleExpertGameClick = () => {
         handleGameTypeClick(6, 'All');
-        setIsQuickGameClicked(false);
-        setIsExpertGameClicked(true);
-        setIsFullGameClicked(false);
+        setExpertGameType(true);
         setIsGameSelected(true);
     };
 
     const handleFullGameClick = () => {
         handleGameTypeClick(36, 'All');
-        setIsQuickGameClicked(false);
-        setIsExpertGameClicked(false);
-        setIsFullGameClicked(true);
         setIsGameSelected(true);
     };
-
-
 
     const handleNextQuestion = () => {
         let newQuestionIndex = questionIndex + 1;
@@ -151,7 +121,7 @@ function App() {
         }
 
 
-            {isGameSelected && isExpertGameClicked &&
+            {isGameSelected && expertGameType &&
                 <div className="cardsContainer cards">
                     <div className='container'>Select your category</div>
                     <div className="cardsContainer">
