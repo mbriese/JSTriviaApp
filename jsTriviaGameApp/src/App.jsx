@@ -19,6 +19,8 @@ function App() {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [isGameSelected, setIsGameSelected] = useState(false);
     const [expertGameType, setExpertGameType] = useState(false);
+    const [isCorrect, setIsCorrect] = useState(false);
+    const [totalScore, setTotalScore] = useState(0);
 
     const handleClick = useCallback((category) => {
         if (category === 'All') {
@@ -31,6 +33,7 @@ function App() {
 
     const handleGameTypeClick = useCallback((count, category) => {
         handleClick(category);
+
         let myFilteredQuestions = questions;
         if (category === 'All') {
             setFilteredQuestions(questions)
@@ -67,6 +70,10 @@ function App() {
             newQuestionIndex = 0;
         }
         setQuestionIndex(newQuestionIndex);
+        // Update the score if the answer is correct
+        if (isCorrect) {
+            setTotalScore(totalScore+1)
+        }
     };
 
     const handlePrevQuestion = () => {
@@ -151,6 +158,7 @@ function App() {
                                 key={filteredQuestions.at(questionIndex).id}
                                 id={filteredQuestions.at(questionIndex).id}
                                 category={filteredQuestions.at(questionIndex).category}
+                                numberOfQuestions={filteredQuestions.length}
                                 question={filteredQuestions.at(questionIndex).question}
                                 answer0={filteredQuestions.at(questionIndex).choices[0].text}
                                 answer1={filteredQuestions.at(questionIndex).choices[1].text}
@@ -164,6 +172,10 @@ function App() {
                                 filteredQuestions={filteredQuestions}
                                 onNextQuestion={handleNextQuestion}
                                 onPrevQuestion={handlePrevQuestion}
+                                isCorrect={isCorrect}
+                                setIsCorrect={setIsCorrect}
+                                totalScore={totalScore}
+                                setTotalScore={setTotalScore}
                             />)
                     }
                     <div>
