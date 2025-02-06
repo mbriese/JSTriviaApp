@@ -31,6 +31,7 @@ function QCard({
     const [showAnswer, setShowAnswer] = useState(false)
     const [answered, setAnswered] = useState(false)
     const [score, setScore] = useState(0);
+
     const [selectedAnswer, setSelectedAnswer] = useState(null);
 
 
@@ -61,7 +62,7 @@ function QCard({
         console.log('total number of questions in this round: ', {numberOfQuestions})
         setShowQuestion(showQuestion);
         setShowAnswer(!showAnswer);
-        setAnswered(!answered);
+        setAnswered(true);
         setSelectedAnswer(answer);
 
         // was the answer correct?
@@ -73,6 +74,7 @@ function QCard({
         ) {
             console.log('correct answer')
             setScore(score + 1);
+
             setIsCorrect(true);
         } else {
             console.log('incorrect answer')

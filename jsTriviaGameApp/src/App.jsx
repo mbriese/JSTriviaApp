@@ -83,13 +83,21 @@ function App() {
         }
         setQuestionIndex(newQuestionIndex);
     };
+    const handleQuit = () => {
+        setFilteredQuestions(questions);
+        setQuestionIndex(0);
+        setIsGameSelected(false);
+        setExpertGameType(false);
+        setIsCorrect(false);
+        setTotalScore(0);
+        // go back to the beginning
+    };
 
     return (
         <>
-        { !isGameSelected &&
+        { !isGameSelected ?
             <div className="main-nav">
                 <h2> Lets Play Trivial Pursuit </h2>
-
                 <p>Select Game Type</p>
                 <div className="container">
                     <Accordion allowMultipleOpen>
@@ -123,10 +131,15 @@ function App() {
                             </button>
                         </AccordionSection>
                     </Accordion>
-                </div>
+                </div>)
             </div>
+            : (
+                <div className="main-nav">
+                  <h2>Playing game</h2>
+                    <p>Score: {totalScore}</p>
+            </div>
+            )
         }
-
 
             {isGameSelected && expertGameType &&
                 <div className="cardsContainer cards">
@@ -184,10 +197,16 @@ function App() {
                                 disabled={questionIndex <= 0}>Prev Question
                         </button>
                         <button
-                                className='navigate-questions-button'
-                                onClick={handleNextQuestion}
-                                disabled={questionIndex >= filteredQuestions.length - 1}>Next Question
+                            className='navigate-questions-button'
+                            onClick={handleNextQuestion}
+                            disabled={questionIndex >= filteredQuestions.length - 1}>Next Question
                         </button>
+                    <div>
+                        <button
+                            className='quit-button'
+                            onClick={handleQuit}>Quit Game
+                        </button>
+                    </div>
                     </div>
                 </div>}
 

@@ -82,8 +82,22 @@ html, body {
   padding: 20px;
   border-radius: 25px;
 }
+
+.quit-button {
+  display: block;
+  height: 50px;
+  background-color: mediumblue;
+  text-align: center;
+  align-items: center;
+  color: white;
+  margin: 25px auto;
+  width: 50%;
+  padding: 20px;
+  border-radius: 25px;
+}
 /* differentiate between game type navbar styles */
 .game-type-nav {
+  display: block;
   height: 150px;
   top: 0;
   background-color: silver  ; /* Silver for tinsel */
