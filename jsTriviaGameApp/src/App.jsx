@@ -21,6 +21,7 @@ function App() {
     const [expertGameType, setExpertGameType] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
     const [totalScore, setTotalScore] = useState(0);
+    const [gameOver, setGameOver] = useState(false);
 
     const handleClick = useCallback((category) => {
         if (category === 'All') {
@@ -46,6 +47,7 @@ function App() {
         }
         setFilteredQuestions(myFilteredQuestions)
         setIsGameSelected(true);
+        setGameOver(false);
     }, [handleClick, filteredQuestions]);
 
     const handleQuickGameClick = () => {
@@ -67,13 +69,14 @@ function App() {
     const handleNextQuestion = () => {
         let newQuestionIndex = questionIndex + 1;
         if (newQuestionIndex >= filteredQuestions.length) {
-            newQuestionIndex = 0;
+            setGameOver(true);
         }
         setQuestionIndex(newQuestionIndex);
         // Update the score if the answer is correct
         if (isCorrect) {
             setTotalScore(totalScore+1)
         }
+        console.log('game over', {gameOver})
     };
 
     const handlePrevQuestion = () => {

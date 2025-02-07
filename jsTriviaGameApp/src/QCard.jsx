@@ -74,7 +74,6 @@ function QCard({
         ) {
             console.log('correct answer')
             setScore(score + 1);
-
             setIsCorrect(true);
         } else {
             console.log('incorrect answer')
