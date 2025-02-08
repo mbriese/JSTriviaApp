@@ -11,7 +11,7 @@ import AccordionSection from "./components/AccordionSection.jsx"
 
 const categories = ['All', 'Geography', 'Entertainment', 'History', 'Arts & Literature',
     'Science & Nature', 'Sports & Leisure'];
-const randomIndex = Math.floor(Math.random()*questions.length);
+
 
 function App() {
     const [filteredQuestions, setFilteredQuestions] = useState(questions);
@@ -22,8 +22,15 @@ function App() {
     const [isCorrect, setIsCorrect] = useState(false);
     const [totalScore, setTotalScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
+    const [randomIndex, setRandomIndex] = useState(0);
+
+    const generateRandomIndex = useCallback(() => {
+        const randomIndex = Math.floor(Math.random() * questions.length)+1;
+        setRandomIndex(randomIndex);
+    }, []);
 
     const handleClick = useCallback((category) => {
+        console.log('handle click called')
         if (category === 'All') {
             setFilteredQuestions(questions)
         } else {
@@ -33,8 +40,8 @@ function App() {
     }, []);
 
     const handleGameTypeClick = useCallback((count, category) => {
+        console.log('handle game type called')
         handleClick(category);
-
         let myFilteredQuestions = questions;
         if (category === 'All') {
             setFilteredQuestions(questions)
@@ -43,30 +50,43 @@ function App() {
             setFilteredQuestions(myFilteredQuestions)
         }
         if (count === 6) {
-            myFilteredQuestions = filteredQuestions.slice(randomIndex, randomIndex+6);
+            console.log('getting a random index called')
+            generateRandomIndex();
+            console.log('random index is ', randomIndex)
+            if ((randomIndex+6) <= (questions.length-1)) {
+                myFilteredQuestions = filteredQuestions.slice(randomIndex, randomIndex+6);}
+            else {
+                let end = (questions.length - (randomIndex+6))
+                myFilteredQuestions = filteredQuestions.slice(randomIndex, (questions.length-1));
+                myFilteredQuestions.unshift(...filteredQuestions.slice(0, end))
+            }
         }
         setFilteredQuestions(myFilteredQuestions)
         setIsGameSelected(true);
         setGameOver(false);
-    }, [handleClick, filteredQuestions]);
+    }, [handleClick, filteredQuestions, generateRandomIndex, randomIndex]);
 
     const handleQuickGameClick = () => {
+        console.log('handle handle quick game click called')
         handleGameTypeClick(6, 'All');
         setIsGameSelected(true);
     };
 
     const handleExpertGameClick = () => {
+        console.log('handle expert click called')
         handleGameTypeClick(6, 'All');
         setExpertGameType(true);
         setIsGameSelected(true);
     };
 
     const handleFullGameClick = () => {
+        console.log('handle full game click called')
         handleGameTypeClick(36, 'All');
         setIsGameSelected(true);
     };
 
     const handleNextQuestion = () => {
+        console.log('handle next question click called')
         let newQuestionIndex = questionIndex + 1;
         if (newQuestionIndex >= filteredQuestions.length) {
             setGameOver(true);
@@ -80,6 +100,7 @@ function App() {
     };
 
     const handlePrevQuestion = () => {
+        console.log('handle previous question click called')
         let newQuestionIndex = questionIndex - 1;
         if (newQuestionIndex < 0) {
             newQuestionIndex = filteredQuestions.length - 1;
@@ -87,6 +108,7 @@ function App() {
         setQuestionIndex(newQuestionIndex);
     };
     const handleQuit = () => {
+        console.log('handle quit game called')
         setFilteredQuestions(questions);
         setQuestionIndex(0);
         setIsGameSelected(false);

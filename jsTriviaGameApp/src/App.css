@@ -150,6 +150,21 @@ html, body {
   background-color: #f7b64e; /* Slightly darker on hover */
 }
 
+.correct-answer-button {
+  display: inline-block;
+  padding: 5px 15px 3px 3px;
+  margin: 5px 5px;
+  text-indent: 15px;
+  border-radius: 50px; /* Pill shape */
+  background-color: #4169E1;
+  color: white;
+  border-color: black;
+  border-width: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
 .badge:hover {
   background-color: #4169E1; /* Slightly darker on hover */
 }

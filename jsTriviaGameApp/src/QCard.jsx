@@ -1,6 +1,7 @@
 import {useState} from "react";
 
 import PropTypes from "prop-types";
+import DisplayCorrectAnswer from "./DisplayCorrectAnswer.jsx";
 
 
 function QCard({
@@ -48,18 +49,14 @@ function QCard({
         answer1Correct: PropTypes.bool,
         answer2Correct: PropTypes.bool,
         answer3Correct: PropTypes.bool,
-        //questionIndex: PropTypes.number,
-        //filteredQuestions: PropTypes.array,
         onNextQuestion: PropTypes.func,
         onPrevQuestion: PropTypes.func,
-        //isCorrect: PropTypes.bool,
         setIsCorrect: PropTypes.func,
         totalScore: PropTypes.number,
         setTotalScore: PropTypes.func,
     };
 
     function handleButtonClick(answer) {
-        console.log('total number of questions in this round: ', {numberOfQuestions})
         setShowQuestion(showQuestion);
         setShowAnswer(!showAnswer);
         setAnswered(true);
@@ -81,16 +78,9 @@ function QCard({
         }
     }
 
-    // const handleNextQuestion = () => {
-    //     onNextQuestion();
-    // }
 
-    // const handlePrevQuestion = () => {
-    //     onPrevQuestion();
-    // }
     return (
         /* show the front of card and all answers */
-
         <div className='container'>
             {!answered &&
                 <div
@@ -153,28 +143,21 @@ function QCard({
                                 answer1 : selectedAnswer === "answer2" ?
                                     answer2 : selectedAnswer === "answer3" ?
                                         answer3 : ""}
-                        </div>
 
-                        {answer0Correct
-                            && <div className="badge">Correct answer: {answer0} </div>
-                            && <div className='scoreContainer'>
-                                <div>Total Score: {totalScore} of {numberOfQuestions}</div>
-                            </div>}
-                        {answer1Correct &&
-                            <div className="badge">Correct answer: {answer1}</div>
-                            && <div className='scoreContainer'>
-                                <div>Total Score: {totalScore} of {numberOfQuestions}</div>
-                            </div>}
-                        {answer2Correct &&
-                            <div className="badge">Correct answer: {answer2} </div>
-                            && <div className='scoreContainer'>
-                                <div>Total Score: {totalScore} of {numberOfQuestions}</div>
-                            </div>}
-                        {answer3Correct &&
-                            <div className="badge">Correct answer: {answer3} </div>
-                            && <div className='scoreContainer'>
-                                <div>Total Score: {totalScore} of {numberOfQuestions}</div>
-                            </div>}
+                        </div>
+                        <DisplayCorrectAnswer
+                            answer0Correct = {answer0Correct}
+                            answer1Correct = {answer1Correct}
+                            answer2Correct = {answer2Correct}
+                            answer3Correct = {answer3Correct}
+                            answer0 = {answer0}
+                            answer1 = {answer1}
+                            answer2 = {answer2}
+                            answer3 = {answer3}
+                            totalScore = {totalScore}
+                            numberOfQuestions = {numberOfQuestions}
+                        />
+
                     </div>
                 }
             </div>
