@@ -11,7 +11,7 @@ import AccordionSection from "./components/AccordionSection.jsx"
 
 const categories = ['All', 'Geography', 'Entertainment', 'History', 'Arts & Literature',
     'Science & Nature', 'Sports & Leisure'];
-
+const randomIndex = Math.floor(Math.random()*questions.length);
 
 function App() {
     const [filteredQuestions, setFilteredQuestions] = useState(questions);
@@ -43,7 +43,7 @@ function App() {
             setFilteredQuestions(myFilteredQuestions)
         }
         if (count === 6) {
-            myFilteredQuestions = filteredQuestions.slice(0, 6);
+            myFilteredQuestions = filteredQuestions.slice(randomIndex, randomIndex+6);
         }
         setFilteredQuestions(myFilteredQuestions)
         setIsGameSelected(true);
@@ -134,12 +134,12 @@ function App() {
                             </button>
                         </AccordionSection>
                     </Accordion>
-                </div>)
+                </div>
             </div>
             : (
                 <div className="main-nav">
                   <h2>Playing game</h2>
-                    <p>Score: {totalScore}</p>
+                    <p>Total Score: {totalScore}</p>
             </div>
             )
         }

@@ -160,20 +160,16 @@ function QCard({
                             && <div className='scoreContainer'>
                                 <div>Total Score: {totalScore} of {numberOfQuestions}</div>
                             </div>}
-
                         {answer1Correct &&
                             <div className="badge">Correct answer: {answer1}</div>
                             && <div className='scoreContainer'>
                                 <div>Total Score: {totalScore} of {numberOfQuestions}</div>
                             </div>}
-
-
                         {answer2Correct &&
                             <div className="badge">Correct answer: {answer2} </div>
                             && <div className='scoreContainer'>
                                 <div>Total Score: {totalScore} of {numberOfQuestions}</div>
                             </div>}
-
                         {answer3Correct &&
                             <div className="badge">Correct answer: {answer3} </div>
                             && <div className='scoreContainer'>
