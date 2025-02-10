@@ -60,6 +60,7 @@ function App() {
                 myFilteredQuestions = filteredQuestions.slice(randomIndex, (questions.length-1));
                 myFilteredQuestions.unshift(...filteredQuestions.slice(0, end))
             }
+            console.log('number of questions selected ', myFilteredQuestions.length)
         }
         setFilteredQuestions(myFilteredQuestions)
         setIsGameSelected(true);

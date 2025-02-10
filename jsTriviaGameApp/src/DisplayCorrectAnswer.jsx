@@ -12,12 +12,13 @@ DisplayCorrectAnswer.propTypes = {
     answer1: PropTypes.string,
     answer2: PropTypes.string,
     answer3: PropTypes.string,
+    incorrectScore: PropTypes.number,
     totalScore: PropTypes.number,
     numberOfQuestions: PropTypes.number
 }
 
 function DisplayCorrectAnswer({ answer0Correct, answer1Correct, answer2Correct, answer3Correct, answer0, answer1,
-                                  answer2, answer3, totalScore, numberOfQuestions}) {
+                                  answer2, answer3, incorrectScore, totalScore, numberOfQuestions}) {
     return (
         <>
 
@@ -25,21 +26,25 @@ function DisplayCorrectAnswer({ answer0Correct, answer1Correct, answer2Correct, 
                 && <div className='scoreContainer'>
                     <div className='correct-answer-button'>Correct answer: {answer0}</div>
                     <div>Total Score: {totalScore} of {numberOfQuestions}</div>
+                    <div>Incorrect Score: {incorrectScore}</div>
                 </div>}
             {answer1Correct
                 && <div className='scoreContainer'>
                     <div className='correct-answer-button'>Correct answer: {answer1}</div>
                     <div>Total Score: {totalScore} of {numberOfQuestions}</div>
+                    <div>Incorrect Score: {incorrectScore}</div>
                 </div>}
             {answer2Correct
                 && <div className='scoreContainer'>
                     <div className='correct-answer-button'>Correct answer: {answer2}</div>
                     <div>Total Score: {totalScore} of {numberOfQuestions}</div>
+                    <div>Incorrect Score: {incorrectScore}</div>
                 </div>}
             {answer3Correct
                 && <div className='scoreContainer'>
                     <div className='correct-answer-button'>Correct answer: {answer3}</div>
                     <div>Total Score: {totalScore} of {numberOfQuestions}</div>
+                    <div>Incorrect Score: {incorrectScore}</div>
                 </div>}
         </>
 

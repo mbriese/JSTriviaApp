@@ -2,7 +2,8 @@ import {useState} from "react";
 
 import PropTypes from "prop-types";
 import DisplayCorrectAnswer from "./DisplayCorrectAnswer.jsx";
-
+// eslint-disable-next-line no-unused-vars
+import DisplayQuestion from "./DisplayQuestion.jsx"
 
 function QCard({
                    id,
@@ -17,15 +18,9 @@ function QCard({
                    answer1Correct,
                    answer2Correct,
                    answer3Correct,
-                   // questionIndex,
-                   // filteredQuestions,
-                   // onNextQuestion,
-                   // onPrevQuestion,
-                   // isCorrect,
+
                    setIsCorrect,
                    totalScore,
-                   //setTotalScore,
-
                }) {
 
     const [showQuestion, setShowQuestion] = useState(true)
@@ -34,7 +29,7 @@ function QCard({
     const [score, setScore] = useState(0);
 
     const [selectedAnswer, setSelectedAnswer] = useState(null);
-
+    const [incorrectScore, setIncorrectScore] = useState(0);
 
     QCard.propTypes = {
         id: PropTypes.number,
@@ -63,19 +58,24 @@ function QCard({
         setSelectedAnswer(answer);
 
         // was the answer correct?
-        if (
+        const isCorrect = (
             (answer === 'answer0' && answer0Correct) ||
             (answer === 'answer1' && answer1Correct) ||
             (answer === 'answer2' && answer2Correct) ||
             (answer === 'answer3' && answer3Correct)
-        ) {
+        );
+
+
+        if (isCorrect) {
             console.log('correct answer')
-            setScore(score + 1);
-            setIsCorrect(true);
+            setScore(score+1)
+            setIsCorrect(true)
         } else {
             console.log('incorrect answer')
-            setIsCorrect(false);
+            setIsCorrect(false)
+            setIncorrectScore(incorrectScore+1)
         }
+        setScore(totalScore + (isCorrect ? 1 : 0));
     }
 
 
@@ -86,8 +86,25 @@ function QCard({
                 <div
                     className='scoreContainer'>
                     <div>Total Score: {totalScore} of {numberOfQuestions}</div>
+                    <div>Incorrect: {incorrectScore}</div>
                 </div>}
 
+            {/*<div className='cardsContainer'>*/}
+            {/*    <DisplayQuestion*/}
+            {/*        answered = {answered}*/}
+            {/*        category = {category}*/}
+            {/*        id = {id}*/}
+            {/*        question = {question}*/}
+            {/*        answer0 = {answer0}*/}
+            {/*        answer1 = {answer1}*/}
+            {/*        answer2 = {answer2}*/}
+            {/*        answer3 = {answer3}*/}
+            {/*        answer0Correct = {answer0Correct}*/}
+            {/*        answer1Correct = {answer1Correct}*/}
+            {/*        answer2Correct = {answer2Correct}*/}
+            {/*        answer3Correct = {answer3Correct}*/}
+            {/*            />*/}
+            {/*</div>*/}
             <div className="cardsContainer">
                 {!answered &&
                     <div className="card">
@@ -155,6 +172,7 @@ function QCard({
                             answer2 = {answer2}
                             answer3 = {answer3}
                             totalScore = {totalScore}
+                            incorrectScore = {incorrectScore}
                             numberOfQuestions = {numberOfQuestions}
                         />
 
